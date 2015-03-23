@@ -14,7 +14,7 @@ class Prize
     if someLevels > 0
       @levels = someLevels
     else 
-      @levles = 0
+      @levels = 0
     end  
   end
   
