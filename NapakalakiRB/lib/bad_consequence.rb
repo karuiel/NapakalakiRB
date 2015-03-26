@@ -123,4 +123,17 @@ class BadConsequence
     out
    
   end
+  def isEmpty
+    
+  end
+  def substractVisibleTreasure(t)
+    
+  end
+  
+  def substractVisibleTreasure(t)
+    
+  end
+  def adjustToFitTreasureLists(v,h)
+      
+  end
 end
