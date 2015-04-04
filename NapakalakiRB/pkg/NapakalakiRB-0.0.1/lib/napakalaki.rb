@@ -14,7 +14,7 @@ class Napakalaki
   def initialize
     #@currentPlayer
     #@currentMonster
-    #@players = ArrayList.new
+    #@players = Array.new
     
   end
     def initPlayers(names)

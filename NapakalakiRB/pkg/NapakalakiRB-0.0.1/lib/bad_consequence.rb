@@ -119,7 +119,11 @@ class BadConsequence
    
   end
   def isEmpty
-    
+    if(@levels == 0 && @nVisibleTreasures==0 && @nHiddenTreasures==0 && death==false)
+      true
+    else
+      false
+    end
   end
   
   def kills
