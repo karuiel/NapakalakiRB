@@ -60,7 +60,7 @@ class Player
   
   def die
   end
-  
+ 
   def discardNecklaceIfVisible
   end
   

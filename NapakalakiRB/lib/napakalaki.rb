@@ -8,8 +8,7 @@ class Napakalaki
   attr_reader :currentMonster
   attr_reader :visibleTreasures
   attr_reader :hiddenTreasures
-  private_class_method :initPlayers
-  private_class_method :nextPlayer
+  
   
   def initialize
     #@currentPlayer
@@ -63,5 +62,7 @@ class Napakalaki
     def endOfGame(result)
       
     end
-  
+    
+  private :initPlayers
+  private :nextPlayer
 end

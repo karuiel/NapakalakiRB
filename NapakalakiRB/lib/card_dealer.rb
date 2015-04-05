@@ -4,10 +4,7 @@
 require 'singleton'
 class CardDealer
   include Singleton
-  private_class_method :initTreasureCardDeck
-  private_class_method :initMonsterCardDeck
-  private_class_method :shuffleTreasures
-  private_class_method :shuffleMonsters
+  
     
   def initialize
     @unusedMonsters = Array.new
@@ -271,6 +268,10 @@ class CardDealer
     
     def initCards
     end
-
+    
+  private :initTreasureCardDeck
+  private :initMonsterCardDeck
+  private :shuffleTreasures
+  private :shuffleMonsters
 
 end

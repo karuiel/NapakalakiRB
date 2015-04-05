@@ -6,11 +6,15 @@ require_relative "monster.rb"
 require_relative "treasure_kind.rb"
 require_relative "dice.rb"
 require_relative "player.rb"
+require_relative "card_dealer.rb"
+require_relative "combat_result.rb"
+require_relative "napakalaki.rb"
+require_relative "treasure.rb"
+
 
 
 #-----------------------------Prueba Sesión 1--------------------------
-prueba = Player.new("migue")
-prueba.incrementLevels(2)
+
 price = Prize.new(1,1)
 puts "Premio creado: " + price.to_s
 
