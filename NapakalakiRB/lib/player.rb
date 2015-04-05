@@ -19,15 +19,7 @@ class Player
   attr_reader :hiddenTreasures
   attr_reader :visibleTreasures
   
-  private_class_method :bringToLive
-  private_class_method :incrementLevels
-  private_class_method :decrementLevels
-  private_class_method :setPendingBadConsequence
-  private_class_method :die
-  private_class_method :discardNecklaceIfVisible
-  private_class_method :dieIfNoTreasures
-  private_class_method :canIBuyLevels
-  protected_class_method :computeGoldCoinsValue
+
   
   def initialize(name)
     @dead = false
@@ -37,7 +29,7 @@ class Player
     @hiddenTreasures = Array.new
   end
  
-  def private_class_method bringToLive  
+  def bringToLive  
     @dead = false    
   end  
   
@@ -78,7 +70,7 @@ class Player
     end
   end  
   
-  def canIBuyLevlels(l)
+  def canIBuyLevels(l)
     if((@levels + l)<10)
       true
     else
@@ -166,5 +158,15 @@ class Player
       true
     end
   end 
+  
+  private :bringToLive
+  private :incrementLevels
+  private :decrementLevels
+  private :setPendingBadConsequence
+  private :die
+  private :discardNecklaceIfVisible
+  private :dieIfNoTreasures
+  private :canIBuyLevels
+  protected :computeGoldCoinsValue
   
 end
