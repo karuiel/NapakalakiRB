@@ -43,6 +43,7 @@
 #En este método se devuelve un string con el estado completo del objeto
 #
 
+#Nota: he cambiado el isEmpty: faltaba comprobar los tesoros especificos
 class BadConsequence
   
   private_class_method :new
@@ -118,8 +119,10 @@ class BadConsequence
     out
    
   end
+  
   def isEmpty
-    if(@levels == 0 && @nVisibleTreasures==0 && @nHiddenTreasures==0 && death==false)
+    if(@levels == 0 && @nVisibleTreasures==0 && @nHiddenTreasures==0 && death==false &&
+                    @specificVisibleTreasure.size==0  && @specificHiddenTreasures.size==0)
       true
     else
       false

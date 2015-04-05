@@ -1,16 +1,15 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
+#!/usr/bin/env ruby
+#encoding: utf-8
+
 require 'singleton'
 class CardDealer
   include Singleton
-    private_class_method :initTreasureCardDeck
-    private_class_method :initMonsterCardDeck
-    private_class_method :shuffleTreasures
-    private_class_method :shuffleMonsters
+  private_class_method :initTreasureCardDeck
+  private_class_method :initMonsterCardDeck
+  private_class_method :shuffleTreasures
+  private_class_method :shuffleMonsters
     
   def initialize
- 
     @unusedMonsters = Array.new
     @usedMonsters = Array.new 
     @unusedTreasures = Array.new
