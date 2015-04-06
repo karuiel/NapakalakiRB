@@ -43,7 +43,8 @@
 #En este método se devuelve un string con el estado completo del objeto
 #
 
-#Nota: he cambiado el isEmpty: faltaba comprobar los tesoros especificos
+#Nota: aqui esta lo que te decia, mira como está el new.¿Por que aqui no da problemas :S?
+#
 class BadConsequence
   
   private_class_method :new

@@ -11,7 +11,7 @@ require_relative "combat_result.rb"
 require_relative "napakalaki.rb"
 require_relative "treasure.rb"
 
-
+#NOTA: dejamos el main asi? yo lo he quitado de java
 
 #-----------------------------Prueba Sesión 1--------------------------
 
@@ -84,7 +84,7 @@ prize = Prize.new(4,2)
 badConsequence = BadConsequence.newNumberOfTreasures('Pierdes 5 niveles y 3 tesoros visibles',
                                                       5 , 3, 0)
 monsters << Monster.new('El rey de rosa', 13, prize, badConsequence)
-#Revisar este montruo creo que el constructor correcto seria number of treasures
+
 prize = Prize.new(1,1) 
 badConsequence = BadConsequence.newSpecificTreasures(
     'Toses los pulmones y pierdes dos niveles', 2, vacio,vacio)

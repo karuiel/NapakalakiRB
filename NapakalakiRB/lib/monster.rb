@@ -32,6 +32,7 @@ class Monster
   attr_reader :bc;
   #en el diagrama viene primero bc y luego price lo cambiamos o lo dejamos asi?
   #tener en cuenta que tambien habria que cambiarlo en el main en todos los mostruos
+  #Nota: yo creo que si que deberiamos cambiarlo. Y en java igual supongo
   def initialize(aName, someCombatLevel, aPrice, aBC)
     @name = aName
     
