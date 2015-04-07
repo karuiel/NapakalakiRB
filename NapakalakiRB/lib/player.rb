@@ -155,5 +155,3 @@ class Player
   protected :computeGoldCoinsValue
   
 end
-jugador = Player.new("maria")
-jugador.getCombatLevel
