@@ -26,15 +26,15 @@
 #
 
 class Monster
-  attr_reader :name;
-  attr_reader :combatLevel;
-  attr_reader :price;
-  attr_reader :bc;
+  attr_reader :name
+  attr_reader :combatLevel
+  attr_reader :price
+  attr_reader :bc
   #en el diagrama viene primero bc y luego price lo cambiamos o lo dejamos asi?
   #tener en cuenta que tambien habria que cambiarlo en el main en todos los mostruos
   #Nota: yo creo que si que deberiamos cambiarlo
   
-  def initialize(aName, someCombatLevel, aPrice, aBC)
+  def initialize(aName, someCombatLevel, aBC, aPrice)
     @name = aName
     
     if someCombatLevel > 0
