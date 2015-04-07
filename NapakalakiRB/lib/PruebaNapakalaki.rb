@@ -11,7 +11,6 @@ require_relative "combat_result.rb"
 require_relative "napakalaki.rb"
 require_relative "treasure.rb"
 
-#NOTA: dejamos el main asi? yo lo he quitado de java
 
 #-----------------------------Prueba Sesión 1--------------------------
 

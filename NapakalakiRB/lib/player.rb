@@ -2,15 +2,14 @@
 #encoding: utf-8
 
 #NOTA: 
-#preguntar lo del collar.
 #¿Que pasa con la constante?
 
 class Player
   
-  #attr_reader :MAXHIDDENTREASURES = 4 
+  attr_reader :MAXHIDDENTREASURES 
   attr_reader :hiddenTreasures
   attr_reader :visibleTreasures
-  
+  MAXHIDDENTREASURES = 4
 
   
   def initialize(name)
@@ -19,6 +18,7 @@ class Player
     @level = 1
     @visibleTreasures = Array.new
     @hiddenTreasures = Array.new
+    @pendingBadConsequence = BadConsequence.newDeath("vacio", false)
   end
  
   def bringToLive  
@@ -137,7 +137,7 @@ class Player
   end
   
   def hasVisibleTreasures
-    if(@visibleTreasures.size = 0)
+    if(@visibleTreasures.size == 0)
       false
     else
       true
