@@ -2,10 +2,18 @@
 #encoding: utf-8
 
 require 'singleton'
-class Dice
-  include Singleton
-  
-  def nextNumber
-    1 + rand(6)
+
+module Model
+  class Dice
+   
+    include Singleton
+    
+    def initialize
+      
+    end
+    
+    def nextNumber
+      1 + rand(6)
+    end
   end
 end

@@ -1,16 +1,51 @@
 #encoding: utf-8
 
-require_relative "prize.rb"
-require_relative "bad_consequence.rb"
-require_relative "monster.rb"
-require_relative "treasure_kind.rb"
-require_relative "dice.rb"
-require_relative "player.rb"
-require_relative "card_dealer.rb"
-require_relative "combat_result.rb"
-require_relative "napakalaki.rb"
-require_relative "treasure.rb"
+module Model
+  require_relative "prize.rb"
+  require_relative "bad_consequence.rb"
+  require_relative "monster.rb"
+  require_relative "treasure_kind.rb"
+  require_relative "dice.rb"
+  require_relative "player.rb"
+  require_relative "card_dealer.rb"
+  require_relative "combat_result.rb"
+  require_relative "napakalaki.rb"
+  require_relative "treasure.rb"
 
+
+  #Prueba Práctica 2
+
+  #Prueba dice
+  dado = Dice.instance
+  puts dado.nextNumber
+
+  #Prueba BadConsequence
+  bc = BadConsequence.newDeath("vacio",false)
+  puts bc.isEmpty
+  puts bc.kills
+
+  #Prueba de la clase tesoro
+  n = "nombre"
+  g = 1000
+  min = 1
+  max = 4
+  t = TreasureKind::SHOE
+  treasure = Treasure.new(n, g, min, max, t)
+  puts treasure.name
+
+  #Prueba clase player
+  jugador = Player.new("maria")
+  puts jugador.validState
+  puts jugador.isDead
+  puts jugador.getCombatLevel
+
+  #Prueba clase CardDealer
+  crupier = CardDealer.instance 
+  crupier.giveTreasureBack(treasure)
+
+  
+end  
+=begin
 
 #-----------------------------Prueba Sesión 1--------------------------
 
@@ -178,3 +213,4 @@ puts"\n\nLos monstruos cuyo  mal rollo supone la perdida de al menos un tesoro O
     end 
     end
   }  
+=end

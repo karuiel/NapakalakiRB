@@ -43,104 +43,107 @@
 #En este método se devuelve un string con el estado completo del objeto
 #
 
-class BadConsequence
-  
-  private_class_method :new
-  attr_reader :text
-  attr_reader :levels
-  attr_reader :nVisibleTreasures
-  attr_reader :nHiddenTreasures
-  attr_reader :specificHiddenTreasures
-  attr_reader :specificVisibleTreasures
+#require_relative "treasure_kind.rb"
+module Model
+  class BadConsequence
 
-  def initialize(aText, someLevels, someVisibleTreasures, someHiddenTreasures, 
-                  someSpecificVisibleTreasures, someSpecificHiddenTreasures, newDeath)
-    @text = aText
-    if someLevels > 0
-      @levels = someLevels
-    else
-      @levels = 0
+    private_class_method :new
+    attr_reader :text
+    attr_reader :levels
+    attr_reader :nVisibleTreasures
+    attr_reader :nHiddenTreasures
+    attr_reader :specificHiddenTreasures
+    attr_reader :specificVisibleTreasures
+
+    def initialize(aText, someLevels, someVisibleTreasures, someHiddenTreasures, 
+                    someSpecificVisibleTreasures, someSpecificHiddenTreasures, newDeath)
+      @text = aText
+      if someLevels > 0
+        @levels = someLevels
+      else
+        @levels = 0
+      end
+
+      if someVisibleTreasures > 0
+        @nVisibleTreasures = someVisibleTreasures
+      else 
+        @nVisibleTreasures = 0
+      end
+
+      if someHiddenTreasures  > 0
+        @nHiddenTreasures = someHiddenTreasures
+      else 
+        @nHiddenTreasures = 0
+      end
+
+      @specificVisibleTreasures = someSpecificVisibleTreasures
+      @specificHiddenTreasures = someSpecificHiddenTreasures
+      @death = newDeath
+
     end
-    
-    if someVisibleTreasures > 0
-      @nVisibleTreasures = someVisibleTreasures
-    else 
-      @nVisibleTreasures = 0
+
+    def BadConsequence.newNumberOfTreasures(t, l, nVisible, nHidden)
+      new(t, l, nVisible, nHidden, Array.new, Array.new, false)  
     end
-    
-    if someHiddenTreasures  > 0
-      @nHiddenTreasures = someHiddenTreasures
-    else 
-      @nHiddenTreasures = 0
+
+    def BadConsequence.newSpecificTreasures (t, l, v,h)
+      new(t, l, 0, 0, v, h, false)
+
+    end                                       
+
+    def BadConsequence.newDeath (t,death)
+
+      new(t, 0, 0, 0, Array.new, Array.new, death)
+
     end
-    
-    @specificVisibleTreasures = someSpecificVisibleTreasures
-    @specificHiddenTreasures = someSpecificHiddenTreasures
-    @death = newDeath
-    
-  end
-  
-  def BadConsequence.newNumberOfTreasures(t, l, nVisible, nHidden)
-    new(t, l, nVisible, nHidden, Array.new, Array.new, false)  
-  end
-  
-  def BadConsequence.newSpecificTreasures (t, l, v,h)
-    new(t, l, 0, 0, v, h, false)
-     
-  end                                       
-  
-  def BadConsequence.newDeath (t,death)
-    
-    new(t, 0, 0, 0, Array.new, Array.new, death)
-    
-  end
-  
-  def to_s
-    out="Text: #{@text}\nLevels: #{@levels}\nnVisibleTreasures: #{@nVisibleTreasures}\n"+
-    "nHiddenTreasures: #{@nHiddenTreasures}\nDeath: #{@death}\nSpecificVisibleTreasure: "
-    if(@specificVisibleTreasures.size != 0)
-      @specificVisibleTreasures.each {|x|
-        out += x.to_s
-        out += " "}
-    else 
-      out += "nil"
+
+    def to_s
+      out="Text: #{@text}\nLevels: #{@levels}\nnVisibleTreasures: #{@nVisibleTreasures}\n"+
+      "nHiddenTreasures: #{@nHiddenTreasures}\nDeath: #{@death}\nSpecificVisibleTreasure: "
+      if(@specificVisibleTreasures.size != 0)
+        @specificVisibleTreasures.each {|x|
+          out += x.to_s
+          out += " "}
+      else 
+        out += "nil"
+      end
+      out += "\nSpecificHiddenTreasures: "
+      if (@specificHiddenTreasures.size != 0)
+        @specificHiddenTreasures.each {|x| 
+          out += x.to_s 
+          out += " "
+
+          }
+      else
+        out += "nil"
+      end  
+      out
+
     end
-    out += "\nSpecificHiddenTreasures: "
-    if (@specificHiddenTreasures.size != 0)
-      @specificHiddenTreasures.each {|x| 
-        out += x.to_s 
-        out += " "
-        
-        }
-    else
-      out += "nil"
-    end  
-    out
-   
-  end
- 
-  def isEmpty
-    if(@levels == 0 && @nVisibleTreasures==0 && @nHiddenTreasures==0 && death==false &&
-                    @specificVisibleTreasure.size==0  && @specificHiddenTreasures.size==0)
-      true
-    else
-      false
+
+    def isEmpty
+      if(@levels == 0 && @nVisibleTreasures==0 && @nHiddenTreasures==0 && @death==false &&
+                      @specificVisibleTreasures.size==0  && @specificHiddenTreasures.size==0)
+        true
+      else
+        false
+      end
+    end
+
+    def kills
+      @death
+    end
+
+    def substractVisibleTreasure(t)
+
+    end
+
+    def substractHiddenTreasure(t)
+
+    end
+    def adjustToFitTreasureLists(v,h)
+
     end
   end
-  
-  def kills
-    @death
-  end
-  
-  def substractVisibleTreasure(t)
-    
-  end
-  
-  def substractHiddenTreasure(t)
-    
-  end
-  def adjustToFitTreasureLists(v,h)
-      
-  end
+
 end
-

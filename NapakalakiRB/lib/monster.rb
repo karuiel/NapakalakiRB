@@ -25,31 +25,34 @@
 #
 #
 
-class Monster
-  attr_reader :name
-  attr_reader :combatLevel
-  attr_reader :price
-  attr_reader :bc
-  #en el diagrama viene primero bc y luego price lo cambiamos o lo dejamos asi?
-  #tener en cuenta que tambien habria que cambiarlo en el main en todos los mostruos
-  #Nota: yo creo que si que deberiamos cambiarlo
-  
-  def initialize(aName, someCombatLevel, aBC, aPrice)
-    @name = aName
-    
-    if someCombatLevel > 0
-      @combatLevel = someCombatLevel
-    else
-      @combatLevel = 0
-    end  
-    
-    @price = aPrice
-    @bc = aBC    
-  end
-  
-  def to_s
-    "\nName: #{@name}\nCombatLevel: #{@combatLevel}\n Price: #{@price.to_s}"+
-      "\nBadConsequence: #{@bc.to_s}"
-  end
-end
+#require_relative "bad_consequence.rb"
+#require_relative "prize.rb"
 
+module Model
+
+  class Monster
+    attr_reader :name
+    attr_reader :combatLevel
+    attr_reader :price
+    attr_reader :bc
+
+    def initialize(aName, someCombatLevel, aBC, aPrice)
+      @name = aName
+
+      if someCombatLevel > 0
+        @combatLevel = someCombatLevel
+      else
+        @combatLevel = 0
+      end  
+
+      @price = aPrice
+      @bc = aBC    
+    end
+
+    def to_s
+      "\nName: #{@name}\nCombatLevel: #{@combatLevel}\n Price: #{@price.to_s}"+
+        "\nBadConsequence: #{@bc.to_s}"
+    end
+  end
+
+end
