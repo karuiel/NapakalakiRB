@@ -11,6 +11,7 @@ module Model
     attr_reader :MAXHIDDENTREASURES 
     attr_reader :hiddenTreasures
     attr_reader :visibleTreasures
+    attr_reader :name
     @@MAXHIDDENTREASURES = 4
 
 
