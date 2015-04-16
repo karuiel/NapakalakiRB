@@ -268,8 +268,10 @@ module Model
           
         elsif
           @unusedTreasures = @usedTreasures
-          @unusedTreasures.shuffle!
+          @usedTreasures= Array.new
+          shuffleMonters
           nextTreasure = @unusedTreasures.at(0)
+          @unusedTreasures.delete_at(0)
         end
         nextTreasure
       end

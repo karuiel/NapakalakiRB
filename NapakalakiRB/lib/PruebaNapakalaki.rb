@@ -205,7 +205,7 @@ puts "\n\nLos monstruos cuyo buen rollo implica una ganancia de más de un nivel
   }
 
 puts"\n\nLos monstruos cuyo  mal rollo supone la perdida de al menos un tesoro ONEHAND son:\n"
-  monsters.each{ |x|
+  monsters.each { |x|
     if(x.bc.specificVisibleTreasures.find{|y| y == TreasureKind::ONEHAND})
       puts x.to_s 
     else if(x.bc.specificHiddenTreasures.find{|y| y == TreasureKind::ONEHAND})
