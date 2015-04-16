@@ -135,11 +135,35 @@ module Model
     end
 
     def substractVisibleTreasure(t)
-
+      eliminado = false
+      i = 0
+      if @specificVisibleTreasures.size !=0
+        @specificVisibleTreasures.each{|x|
+            i+=1
+            if !eliminado && x == t.type
+                @specificVisibleTreasures.delete_at(i)
+                eliminado = true
+            end
+        }
+       elsif
+         @nVisibleTreasures = [0,@nVisibleTreasures-1].max 
+      end
     end
 
     def substractHiddenTreasure(t)
-
+      eliminado = false
+      i = 0
+      if @specificHiddenTreasures.size !=0
+        @specificHiddenTreasures.each{|x|
+            i+=1
+            if !eliminado && x == t.type
+                @specificHiddenTreasures.delete_at(i)
+                eliminado = true
+            end
+        }
+       elsif
+         @nVisibleTreasures = [0,@nVisibleTreasures-1].max 
+      end
     end
     def adjustToFitTreasureLists(v,h)
 

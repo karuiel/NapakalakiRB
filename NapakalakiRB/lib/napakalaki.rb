@@ -3,6 +3,7 @@
 
 require_relative "player.rb"
 require 'singleton'
+require_relative "combat_result.rb"
 
 module Model
   class Napakalaki
@@ -20,10 +21,17 @@ module Model
 
     end
       def initPlayers(names)
-
+        @players = Array.new
+        names.each{|x| 
+           @players << Player.new(x)
+        }
+      
       end
 
       def nextPlayer
+        @currentPlayerIndex = (@currentPlayerIndex + 1) % @players.size 
+        @currentPlayer = @players.at(@currentPlayerIndex)
+        @currentPlayer
 
       end
 
@@ -59,14 +67,18 @@ module Model
 
       end
       def  nextTurnAllowed
-
+          @currentPlayer.validState
       end
 
       def endOfGame(result)
-
+        result == CombatResult::WINANDWINGAME
       end
 
     private :initPlayers
     private :nextPlayer
-  end
+ 
+  end 
+     
 end
+
+  

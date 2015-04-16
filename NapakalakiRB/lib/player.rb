@@ -69,6 +69,14 @@ module Model
     end
 
     def discardNecklaceIfVisible
+      dealer = CardDealer.instance
+        @visibleTreasures.each{|x|
+            if x.type==TreasureKind::NECKLACE
+                dealer.giveTreasureBack(x)
+                @visibleTreasures.delete(x)
+            end
+        }
+      
     end
 
     def dieIfNoTreasures
@@ -86,6 +94,11 @@ module Model
     end  
 
     def computeGoldCoinsValue(t)
+      coins = 0
+        t.each{|x|
+            coins += x.getGoldCoins()
+        }
+        coins
     end
 
     def applyPrize(p)
@@ -100,7 +113,34 @@ module Model
     def makeTreasureVisible(t)
     end  
 
+    def contains(treasures, t)
+        repetitions = 0
+        treasures.each{|x|
+            if (x.type == t)
+              repetitions +=1
+            end
+        }
+        repetitions
+    end
+    
     def canMakeTreasurevisible(t)
+        type = t.type
+        canMake = false
+        
+        
+        if type == TreasureKind::ONEHAND || type == TreasureKind::BOTHHANDS
+            if contains(@visibleTreasures,TreasureKind::BOTHHANDS)==0
+                onehand = contains(visibleTreasures,TreasureKind::BOTHHANDS)
+                if((onehand < 2) && (type == TreasureKind::ONEHAND) ||
+                         (onehand == 0) && (TreasureKind::BOTHHANDS == type))
+                    canMake = true
+                end
+            end
+        elsif
+            canMake = (contains(visibleTreasures,type) == 0)
+        end
+        canMake
+        
     end  
 
     def discardVisibleTreasure(t)
@@ -167,6 +207,7 @@ module Model
     private :discardNecklaceIfVisible
     private :dieIfNoTreasures
     private :canIBuyLevels
+    private :contains
     protected :computeGoldCoinsValue
 
   end

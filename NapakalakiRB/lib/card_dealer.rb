@@ -262,9 +262,29 @@ module Model
       end
 
       def nextTreasure
+        if @unusedTreasures.size != 0
+          nextTreasure = @unusedTreasures.at(0);
+          @unusedTreasures.delete_at(0)
+          
+        elsif
+          @unusedTreasures = @usedTreasures
+          @unusedTreasures.shuffle!
+          nextTreasure = @unusedTreasures.at(0)
+        end
+        nextTreasure
       end
 
       def nextMonster
+        if @unusedMonster.size != 0
+          nextTreasure = @unusedMonster.at(0);
+          @unusedMonster.delete_at(0)
+          
+        elsif
+          @unusedMonster = @usedMonster
+          @unusedMonster.shuffle!
+          nextTreasure = @unusedMonster.at(0)
+        end
+        nextTreasure
       end
 
       def giveTreasureBack(t)
