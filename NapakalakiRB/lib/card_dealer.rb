@@ -263,7 +263,7 @@ module Model
       end
 
       def nextTreasure
-        if !@unusedTreasures.size != 0
+        if @unusedTreasures.size != 0
           nextTreasure = @unusedTreasures.at(0);
           @unusedTreasures.delete_at(0)
           
