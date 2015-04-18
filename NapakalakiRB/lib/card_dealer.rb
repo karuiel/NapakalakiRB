@@ -16,8 +16,6 @@ module Model
       @usedMonsters = Array.new 
       @unusedTreasures = Array.new
       @usedTreasures = Array.new
-      initTreasureCardDeck
-      initMonsterCardDeck
       shuffleTreasures
       shuffleMonsters
     end  
