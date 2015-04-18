@@ -20,14 +20,12 @@ module Model
     attr_reader :visibleTreasures
     attr_reader :hiddenTreasures
 
-    /*
-      @brief Constructor de la Clase
-    */
+    ##
+    #   Constructor de la Clase
+    #
     def initialize
       @currentPlayerIndex = -1;
-      #@currentPlayer
-      #@currentMonster
-      #@players = Array.new
+
 
     end
     
@@ -47,10 +45,10 @@ module Model
         @hiddenTreasures
       end
       
-      /*
-     * @brief Método encargado de inicializar la lista de jugadores
-     * @param ArrayList<String> names: nombre de los jugadores
-    */
+      ##
+     #  Método encargado de inicializar la lista de jugadores
+     #  ArrayList<String> names: nombre de los jugadores
+    #
       def initPlayers(names)
         @players = Array.new
         names.each{|x| 
@@ -59,10 +57,10 @@ module Model
       
       end
       
-      /*
-     * @brief Método encargado de determinar cuál es el siguiente jugador
-     * @return Player: jugador siguiente
-    */
+      ##
+     #  Método encargado de determinar cuál es el siguiente jugador
+     #  Player: jugador siguiente
+    #
       def nextPlayer
         
         if(@currentPlayerIndex == -1)
@@ -77,10 +75,10 @@ module Model
 
       end
 
-      /*
-     * @brief Método para combatir contra un monstruo
-     * @return CombatResult: resultado del combate
-    */
+      ##
+     #  Método para combatir contra un monstruo
+     #  CombatResult: resultado del combate
+    #
       
       def combat
         result = @currentPlayer.combat(@currentMonster);
@@ -89,18 +87,18 @@ module Model
         return result;
       end
 
-     /*
-     * @brief Método encargado de descartar una carta de tesoro visible de un jugador
-     * @param Treasure t: carta a descartar
-    */
+     ##
+     #  Método encargado de descartar una carta de tesoro visible de un jugador
+     #  Treasure t: carta a descartar
+    #
       def discardVisibleTreasure(t)
         @currentPlayer.discardVisibleTreasure(t)
       end
       
-     /*
-     * @brief Método encargado de descartar una carta de tesoro visible de un jugador
-     * @param Treasure t: carta a descartar
-    */
+     ##
+     #  Método encargado de descartar una carta de tesoro visible de un jugador
+     #  Treasure t: carta a descartar
+    #
       def discardHiddenTreasure(t)
         @currentPlayer.discardVisibleTreasure(t) 
       end
@@ -112,21 +110,21 @@ module Model
         
       end
       
-      /*
-     * @brief Método que gestiona la compra de niveles
-     * @param ArrayList<Treasure> visible: lista de tesoros visibles del jugador
-     * @param ArrayList<Treasure> hidden: lista de tesoros ocultos del jugador
-     * @return boolean: true en caso de que se lleve a cabo la compra
-                        false en caso contrario
-    */
+      ##
+     #  Método que gestiona la compra de niveles
+     #  ArrayList<Treasure> visible: lista de tesoros visibles del jugador
+     #  ArrayList<Treasure> hidden: lista de tesoros ocultos del jugador
+     #  boolean: true en caso de que se lleve a cabo la compra
+     #                   false en caso contrario
+    #
       def buyLevels(visible, hidden)
         return @currentPlayer.buyLevels(visible, hidden)
       end
       
-     /*
-     * @brief Método encargado de iniciar el juego
-     * @param ArrayList<String> players: nombre de los jugadores
-    */
+     ##
+     #  Método encargado de iniciar el juego
+     #  ArrayList<String> players: nombre de los jugadores
+    #
       def initGame(players)
         dealer = CardDealer.instance
         dealer.initCards
@@ -134,28 +132,39 @@ module Model
         nextTurn()
       end
       
-     /*
-     * @brief Consultor de CurrentPlayer
-     * @return Player: currentPlayer
-    */      
+     ##
+     #  Consultor de CurrentPlayer
+     #  Player: currentPlayer
+    #      
       def getCurrentPlayer
         @currentPlayer
       end
       
-     /*
-     * @brief Consultor de CurrentMonster
-     * @return Player: currentMonster
-    */
+     ##
+     #  Consultor de CurrentMonster
+     #  Player: currentMonster
+    #
       def getCurrentMonster
         @currentMonster
       end
       
+    ##
+     #  Método que comprueba si un tesoro oculto puede pasar a ser visible
+     #  Treasure t: tesoro que se quiere hacer visible
+     #  boolean: true en caso en que se pueda hacer visible
+      #                  false en caso contrario
+    #
       def canMakeTreasureVisible(t)
 
         @currentPlayer.canMakeTreasureVisible(t)
         
       end
 
+      ##
+     #  Método para pasar de turno
+     #  boolean: true en caso en que se haya pasado de turno correctamente
+     #                  false en caso contrario
+    #
       def  nextTurn
         allowed = nextTurnAllowed()
         if(allowed)
@@ -169,6 +178,12 @@ module Model
         allowed;
       end
       
+      
+      ##
+     #  Método que comprueba si se puede pasar de turno
+     #  boolean: true en caso en que se pueda pasar de turno
+     #                   false en caso contrario
+    #
       def  nextTurnAllowed
           if(@currentPlayerIndex==-1)
             allowed = true;
@@ -178,6 +193,11 @@ module Model
           allowed
       end
 
+      ##
+     #  Método que determina si el juego ha terminado
+     #  boolean: true en caso en que haya terminado el juego
+     #                  false en caso contrario
+    #
       def endOfGame(result)
         result == CombatResult::WINANDWINGAME
       end
