@@ -1,7 +1,21 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
 
-
+##
+ # Clase que representa un jugador
+ # Invariante de representación:
+ #  -El atributo level debe ser un entero comprendido entre 1 y 10
+ #  -El atributo hiddenTreasures debe ser tener un tamaño igual o menor a 4
+ #  -El atributo visibleTreasures estará constituido por:
+ #       uno o ningún tesoro de tipo armor 
+ #       uno o ningún tesoro de tipo helmet
+ #       uno o ningún tesoro de tipo shoe
+ #       uno o ningún tesoro de tipo necklace
+ #       uno o ningún tesoro de tipo bothhands
+ #       uno, dos o ningún tesoro de tipo onehand en caso de no tener ninguno de tipo
+ #           bothhands, y ninguno en caso contrario
+ #      
+ #
 require_relative "treasure.rb"
 require_relative "monster.rb"
 require_relative "bad_consequence.rb"
@@ -14,7 +28,10 @@ module Model
     attr_reader :name
     @@MAXHIDDENTREASURES = 4
 
-
+##
+ #  Constuctor de la clase
+ #  String name: nombre del jugador   
+ #
     def initialize(name)
       @dead = false
       @name = name
@@ -24,19 +41,35 @@ module Model
       @pendingBadConsequence = BadConsequence.newDeath("vacío", false)
       initTreasures
     end
-
+    
+    ##
+     #  Método para obtener el nivel de combate del jugador
+     # devuelve  int: nivel de combate
+    #
       def getCombatLevel
         @combatLevel
       end
       
+     ##
+     #  Consultor hiddenTreasures
+     # devuelve  ArrayList<Treasures>: hiddenTreasures
+    #
       def getHiddenTreasures
         @hiddenTreasures
       end
       
+      ##
+     #  Consultor visibleTreasures
+     # devuelve  ArrayList<Treasures>: visibleTreasures
+    #
       def getVisibleTreasures
         @visibleTreasures
       end
-    
+      
+     ##
+     #  Consultor del atributo name
+     # devuelve  String: name
+    #
       def getName
         @name
       end
@@ -52,11 +85,17 @@ module Model
     
     #FINEXAMEN
     
-    
+    ##
+     #  Método encargado de revivir al jugador
+    #
     def bringToLife  
       @dead = false    
     end  
 
+        ##
+     #  Método para subir niveles al jugador
+     #  int l: número de niveles a subir
+    #
     def incrementLevels(l)
       if(l>0)
         if((@level + l)>10)
@@ -67,6 +106,10 @@ module Model
       end
     end  
 
+     ##
+     #  Método para bajar niveles al jugador
+     #  int l: número de niveles a decrementar
+    #
     def  decrementLevels(l)
       if(l>0)
         if((@level - l)<=0)
@@ -78,10 +121,17 @@ module Model
     end  
 
 
+     ##
+     #  Método para asignar un mal rollo al jugador
+     #  BadConsequence b: mal rollo a asignar
+     #
     def setPendingBadConsequence(b)
       @pendingBadConsequence = b
     end  
 
+    ##
+    #  Método encargado de gestionar la muerte del jugador
+    #
     def die
       dealer = CardDealer.instance
       @dead = true
@@ -97,6 +147,9 @@ module Model
            
     end
 
+    ##
+    #  Método encargado de descartar el collar si está visible
+    #
     def discardNecklaceIfVisible
       dealer = CardDealer.instance
         @visibleTreasures.each{|x|
@@ -108,12 +161,22 @@ module Model
       
     end
 
+     ##
+     #  Método para cambiar el estado del jugador a muerto 
+     #          en caso de que no tenga tesoros
+    #
     def dieIfNoTreasures
       if(@visibleTreasures.size == 0 && @hiddenTreasures.size == 0)
         @dead=true
       end
     end  
 
+    ##
+     #  Método para determinar si se pueden comprar una cantidad de niveles
+     #  int l: número de niveles a comprar
+     # devuelve  boolean: true en caso de que el incremento no suponga ganar la partida
+     #                  false en caso contrario
+    #
     def canIBuyLevels(l)
       if((@level + l)<10)
         true
@@ -122,6 +185,12 @@ module Model
       end
     end  
 
+     ##
+     #  Método encargado de calcular los niveles que proporcionan una lista 
+     #          de tesoros
+     #  ArrayList<Treasure> t: tesoros 
+     # devuelve  float: niveles que se pueden comprar
+    #
     def computeGoldCoinsValue(t)
       coins = 0
         t.each{|x|
@@ -132,6 +201,10 @@ module Model
         levels
     end
 
+     ##
+     #  Método encargado de recibir un premio
+     #  Prize p: premio a recibir
+    #
     def applyPrize(p)
         nLevels = p.levels
         incrementLevels(nLevels)
@@ -144,6 +217,11 @@ module Model
         end     
     end
 
+     ##
+     #  Método encargado de combatir contra un monstruo
+     #  Monster m: monstruo contra el que combatir
+     # devuelve  CombatResult: resultado del combate
+    #
     def combat(m)
         myLevel = getCombatLevel
         levelMonster = m.getCombatLevel 
@@ -184,6 +262,10 @@ module Model
       
     end
 
+     ##
+     #  Método encargado de aplicar un mal rollo
+     #  BadConsequence bad: mal rollo recibido
+    #
     def applyBadConsequence(bad)
       nLevels = bad.levels
       decrementLevels(nLevels)
@@ -191,6 +273,12 @@ module Model
       setPendingBadConsequence(pendingBad)     
     end
 
+     ##
+     #  Método encargado de decidir si un tesoro oculto puede pasar a visible
+     #  Treasure t: tesoro a hacer visible
+     # devuelve  boolean: true en caso en que se pueda hacer visible
+     #                   false en caso contrario
+    #
     def makeTreasureVisible(t)
 
       if(canMakeTreasureVisible(t))
@@ -204,6 +292,12 @@ module Model
       canMake
     end  
 
+    ##
+     #  Método auxiliar para contar las repeticiones de un tesoro en un array
+     #  ArrayList<Treasure> treasures: array con los tesoros
+     #  TreasureKind t: tesoro a buscar
+     # devuelve  int: número de repeticiones
+     #
     def contains(treasures, t)
         repetitions = 0
         treasures.each{|x|
@@ -213,7 +307,13 @@ module Model
         }
         repetitions
     end
-     
+    
+    ##
+     #  Método encargafdo de determinar si un tesoro que está 
+     #         oculto puede pasar a estar visible
+     # devuelve  boolean: true en caso en que se pueda pasar a visible
+     #                  false en caso contrario
+    #
     def canMakeTreasureVisible(t)
         type = t.type
         canMake = false
@@ -233,6 +333,10 @@ module Model
         
     end  
 
+    ##
+     #  Método para descartarse de un tesoro visible
+     #  Treasure t: tesoro a descartar
+    #
     def discardVisibleTreasure(t)
         @visibleTreasures.delete(t)
         if( (!@pendingBadConsequence.isEmpty()))
@@ -243,6 +347,10 @@ module Model
         dieIfNoTreasures()
     end 
 
+     ##
+     #  Método para descartarse de un tesoro oculto
+     #  Treasure t: tesoro a descartar
+    #
     def discardHiddenTreasure(t)
         @hiddenTreasures.delete(t)
         if( (!@pendingBadConsequence.isEmpty()))
@@ -253,6 +361,13 @@ module Model
         dieIfNoTreasures()
     end
 
+     ##
+     #  Método encargado de gestionar la compra de niveles
+     #  ArrayList<Treasure> visible: lista de tesoros visibles a vender
+     #  ArrayList<Treasure> hidden: lista de tesoros ocultos a vender
+     # devuelve  boolean: true en caso de que se realice la compra
+     #                  false en caso contrario
+    #
     def buyLevels(visible, hidden)
         levels = computeGoldCoinsValue(visible)
         levels += computeGoldCoinsValue(hidden)
@@ -294,6 +409,12 @@ module Model
       total_level
     end
 
+    ##
+     #  Método para determinar si un jugador está en estado válido; es decir:
+     #      no tiene más de 4 tesoros ocultos y no tiene mal rollo pendiente
+     # devuelve  boolean: true en caso de que se encuentre en estado válido
+     #                  false en caso contrario
+     #
     def validState
       valid = true
       if(!@pendingBadConsequence.isEmpty() || @hiddenTreasures.size>4)
@@ -302,6 +423,11 @@ module Model
       valid
     end
 
+     ##
+     #  Método encargado inicializar los tesoros ocultos 
+     # devuelve  boolean: true en caso de éxito
+     #                  false en caso contrario
+    #
     def initTreasures
         bringToLife
         dealer = CardDealer.instance
@@ -326,10 +452,20 @@ module Model
         return true    
     end  
 
+     ##
+     #  Método para determinar si el jugador está muerto
+     # devuelve  boolean true en caso de que esté muerto
+     #                 false en caso contrario
+    #
     def isDead
       @dead
     end
 
+    ##
+     #  Método para determinar si un jugador tiene tesoros visibles
+     # devuelve  boolean: true en caso de tener tesoros visibles
+     #                  fasle en caso contrario
+    #
     def hasVisibleTreasures
       hasV = true
       if(@visibleTreasures.size == 0)
@@ -338,6 +474,10 @@ module Model
       hasV
     end 
 
+     ##
+     #  Método encargado de convertir en String un objeto Player
+     # devuelve  String: cadena de texto obtenida
+    #
     def to_s
        "Nombre: #{@name}\t nivel: #{@level}" 
     end

@@ -10,7 +10,9 @@ module Model
   class CardDealer
     include Singleton
 
-
+    ##
+     #  Constructor 
+    #
     def initialize
       @unusedMonsters = Array.new
       @usedMonsters = Array.new 
@@ -19,9 +21,12 @@ module Model
       shuffleTreasures
       shuffleMonsters
     end  
-
-
-      def initTreasureCardDeck
+    
+    
+    ##
+     #  Método para inicializar el mazo de cartas de tesoros
+    #
+    def initTreasureCardDeck
           name = "¡Sí mi amo!"
           goldCoins = 0
           minBonus = 4
@@ -135,6 +140,9 @@ module Model
           @unusedTreasures << Treasure.new(name, goldCoins, minBonus, maxBonus, type)
       end 
 
+     ##
+     #  Método para inicializar el mazo de cartas de monstruos
+    #
       def initMonsterCardDeck
 
         prize = Prize.new(2,1) 
@@ -254,14 +262,24 @@ module Model
 
       end
 
+      ##
+     #  Método para barajar el mazo de cartar unusedTreasures
+    #
       def shuffleTreasures
         @unusedTreasures.shuffle! 
       end
 
+      ##
+     #  Método para barajar el mazo de cartar unusedMonsters
+    #
       def shuffleMonsters
         @unusedMonsters.shuffle!
       end
 
+      ##
+     #  Método que devuelve la siguiente carta de tesoro
+     # devuelve  Treasure: siguiente tesoro
+    #
       def nextTreasure
         if @unusedTreasures.size != 0         
           nextTreasure = @unusedTreasures.at(0);
@@ -279,6 +297,10 @@ module Model
         nextTreasure
       end
 
+      ##
+     #  Método que devuelve la siguiente carta de monstruo
+     # devuelve  Monster: siguiente monstruo
+    #
       def nextMonster
         if @unusedMonsters.size != 0
           nextTreasure = @unusedMonsters.at(0);
@@ -296,14 +318,23 @@ module Model
         nextTreasure
       end
 
+      ##
+     #  Método para incluir una carta de tesoro en el mazo de usadas
+    #
       def giveTreasureBack(t)
         @usedTreasures << t
       end
 
+      ##
+     #  Método para incluir una carta de monstruo en el mazo de usadas
+    #
       def giveMonsterBack(m)
         @usedMonsters << m
       end
-
+      
+      ##
+     #  Método para inicializar los mazos de cartas
+    #
       def initCards
         initTreasureCardDeck
         initMonsterCardDeck

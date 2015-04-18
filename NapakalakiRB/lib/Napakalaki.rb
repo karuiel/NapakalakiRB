@@ -28,19 +28,27 @@ module Model
 
 
     end
-    
+    ##
+    #   getter de currentPlayer
+    #
       def getCurrentPlayer
         @currentPlayer
       end
-    
+    ##
+    #   getter de currentMonster
+    #
       def getCurrentMonster
         @currentMonster
       end
-      
+    ##
+    #   getter de visibleTreasures
+    #
       def getVisibleTreasures
         @visibleTreasures
       end
-      
+    ##
+    #   getter de hiddenTreasures
+    #
       def getHiddenTreasures
         @hiddenTreasures
       end
@@ -59,7 +67,7 @@ module Model
       
       ##
      #  Método encargado de determinar cuál es el siguiente jugador
-     #  Player: jugador siguiente
+     #  devuelve Player: jugador siguiente
     #
       def nextPlayer
         
@@ -77,7 +85,7 @@ module Model
 
       ##
      #  Método para combatir contra un monstruo
-     #  CombatResult: resultado del combate
+     #  devuelve CombatResult: resultado del combate
     #
       
       def combat
@@ -114,7 +122,7 @@ module Model
      #  Método que gestiona la compra de niveles
      #  ArrayList<Treasure> visible: lista de tesoros visibles del jugador
      #  ArrayList<Treasure> hidden: lista de tesoros ocultos del jugador
-     #  boolean: true en caso de que se lleve a cabo la compra
+     #  devuelve boolean: true en caso de que se lleve a cabo la compra
      #                   false en caso contrario
     #
       def buyLevels(visible, hidden)
@@ -134,7 +142,7 @@ module Model
       
      ##
      #  Consultor de CurrentPlayer
-     #  Player: currentPlayer
+     #  devuelve Player: currentPlayer
     #      
       def getCurrentPlayer
         @currentPlayer
@@ -142,7 +150,7 @@ module Model
       
      ##
      #  Consultor de CurrentMonster
-     #  Player: currentMonster
+     #  devuelve Monster: currentMonster
     #
       def getCurrentMonster
         @currentMonster
@@ -151,7 +159,7 @@ module Model
     ##
      #  Método que comprueba si un tesoro oculto puede pasar a ser visible
      #  Treasure t: tesoro que se quiere hacer visible
-     #  boolean: true en caso en que se pueda hacer visible
+     #  devuelve boolean: true en caso en que se pueda hacer visible
       #                  false en caso contrario
     #
       def canMakeTreasureVisible(t)
@@ -162,7 +170,7 @@ module Model
 
       ##
      #  Método para pasar de turno
-     #  boolean: true en caso en que se haya pasado de turno correctamente
+     #  devuelve boolean: true en caso en que se haya pasado de turno correctamente
      #                  false en caso contrario
     #
       def  nextTurn
@@ -181,7 +189,7 @@ module Model
       
       ##
      #  Método que comprueba si se puede pasar de turno
-     #  boolean: true en caso en que se pueda pasar de turno
+     #  devuelve boolean: true en caso en que se pueda pasar de turno
      #                   false en caso contrario
     #
       def  nextTurnAllowed
@@ -195,7 +203,7 @@ module Model
 
       ##
      #  Método que determina si el juego ha terminado
-     #  boolean: true en caso en que haya terminado el juego
+     #  devuelve boolean: true en caso en que haya terminado el juego
      #                  false en caso contrario
     #
       def endOfGame(result)

@@ -14,12 +14,12 @@
 #
 #La clase _Monster_ esta compuesta por:
 #
-#* método initialize
+## método initialize
 #Este método permite inicializar un objeto de la clase _Monster_, inicializa los
 #atributos mencionados en la descripción de la clase
 #
-#* getters de los atributos
-#* método to_s
+## getters de los atributos
+## método to_s
 #
 #En este método se devuelve un string con el estado completo del objeto
 #
@@ -36,6 +36,13 @@ module Model
     attr_reader :price
     attr_reader :bc
 
+    ##
+     #  Constructor con parámetros
+     #  String name: nombre del monstruo
+     #  int level: nivel de combate del monstruo
+     #  BadConsequence bc: mal rollo del monstrup
+     #  Prize price: buen rollo del monstruo
+     # 
     def initialize(aName, someCombatLevel, aBC, aPrice)
       @name = aName
 
@@ -54,18 +61,34 @@ module Model
         "\nBadConsequence: #{@bc.to_s}"
     end
     
+    ##
+     # Método para obtener el atributo name
+     # devuelve  String: nombre del monstruo
+     # 
     def getName
       @name
     end
     
+    ##
+     #  Método para obtener el atributo combatLevel
+     # devuelve  int: nivel de combate del monstruo
+     # 
     def getCombatLevel
       @combatLevel
     end
     
+    ##
+     # Método para obtener el atributo price
+     # devuelve  Prize: buen rollo del monstruo
+     # 
     def getPrize
       @price
     end
     
+     ##
+     #  Método para obtener el atributo bc
+     # devuelve  BadConsequence: mal rollo del monstruo
+     #
     def getBadConsequence
       @bc
     end
