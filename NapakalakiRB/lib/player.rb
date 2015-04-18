@@ -84,7 +84,7 @@ module Model
 
     def die
       dealer = CardDealer.instance
-      @dead
+      @dead = true
         @visibleTreasures.each{|x|
             dealer.giveTreasureBack(x)
         }
