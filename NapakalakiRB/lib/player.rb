@@ -93,12 +93,16 @@ module Model
       end
     end  
 
+    #Nota: lo he cambiado porque estaba mal hecho
+    #¿Se supone que se devuelve un float no?
     def computeGoldCoinsValue(t)
       coins = 0
+      levels = 0
         t.each{|x|
-            coins += x.getGoldCoins()
+          coins += x.getGoldCoins()
         }
-        coins
+        levels = coins / 1000
+        levels
     end
 
     def applyPrize(p)
@@ -123,6 +127,7 @@ module Model
         repetitions
     end
     
+    #Nota: mismo problema que para java 
     def canMakeTreasurevisible(t)
         type = t.type
         canMake = false
@@ -130,7 +135,7 @@ module Model
         
         if type == TreasureKind::ONEHAND || type == TreasureKind::BOTHHANDS
             if contains(@visibleTreasures,TreasureKind::BOTHHANDS)==0
-                onehand = contains(visibleTreasures,TreasureKind::BOTHHANDS)
+                onehand = contains(visibleTreasures,TreasureKind::ONEHHAND)
                 if((onehand < 2) && (type == TreasureKind::ONEHAND) ||
                          (onehand == 0) && (TreasureKind::BOTHHANDS == type))
                     canMake = true

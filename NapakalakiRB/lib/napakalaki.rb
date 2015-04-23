@@ -20,6 +20,7 @@ module Model
       #@players = Array.new
 
     end
+    
       def initPlayers(names)
         @players = Array.new
         names.each{|x| 
@@ -28,6 +29,7 @@ module Model
       
       end
 
+      #Nota: mimso problema que en java
       def nextPlayer
         @currentPlayerIndex = (@currentPlayerIndex + 1) % @players.size 
         @currentPlayer = @players.at(@currentPlayerIndex)
