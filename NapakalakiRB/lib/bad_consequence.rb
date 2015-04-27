@@ -165,8 +165,51 @@ module Model
          @nVisibleTreasures = [0,@nVisibleTreasures-1].max 
       end
     end
+    
     def adjustToFitTreasureLists(v,h)
-
+       
+      if(@death)
+         bad = newDeath(@text,@death) 
+      
+      else if(@nVisibleTreasures != 0 || @nHiddenTreasures != 0)
+          nV = Math.min(@nVisibleTreasures,v.size())
+          nH = Math.min(@nHiddenTreasures,h.size())
+          bad = newNumberOfTreasures(@text, @levels, nV, nH)
+          
+      else
+        ArrayList<TreasureKind> vT = Array.new
+        ArrayList<TreasureKind> hT = Array.new
+        ArrayList<Treasure> vCopy = v
+        ArrayList<Treasure> hCopy = h
+        
+        @specificVisibleTreasures.each{|t1|
+            boolean found = false
+            vCopy.each{|t2|
+                TreasureKind type = t2.getType()
+                if(type == t1 && !found)
+                    vT.add(t1)
+                    vCopy.remove(t2)
+                    found = true;
+                end
+            }
+          }
+       
+        @specificHiddenTreasures.each{|t1|            
+            boolean found = false
+            @hCopy.each{|t2|
+                TreasureKind type = t2.getType()
+                if(type == t1 && !found)
+                    hT.add(t1)
+                    hCopy.remove(t2)
+                    found = true;
+                end
+            }
+        }
+        bad  = new BadConsequence(@text ,0, vT, hT)
+      end
+      end
+      return bad;
+  
     end
   end
 
