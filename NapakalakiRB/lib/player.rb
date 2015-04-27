@@ -11,6 +11,7 @@ module Model
     attr_reader :MAXHIDDENTREASURES 
     attr_reader :hiddenTreasures
     attr_reader :visibleTreasures
+    attr_reader :name
     @@MAXHIDDENTREASURES = 4
 
 
@@ -66,6 +67,17 @@ module Model
     end  
 
     def die
+      dealer = CardDealer.getInstance()
+        @visibleTreasures.each{|x|
+            dealer.giveTreasureBack(x)
+        }
+        @visibleTreasures.clear
+        
+        @hiddenTreasures.each{|x|
+            dealer.giveTreasureBack(x)
+        }
+        @hiddenTreasures.clear
+           
     end
 
     def discardNecklaceIfVisible
@@ -106,12 +118,25 @@ module Model
     end
 
     def applyPrize(p)
+        nLevels = p.levels
+        incrementLevels(nLevels)
+        dealer = CardDealer.instance
+        nPrize = p.treasures
+        
+        for i in (1..nPrize)
+            treasure = dealer.nextTreasure()
+            @hiddenTreasures.add(treasure)
+        end     
     end
 
     def combat(m)
     end
 
     def applyBadConsequence(bad)
+      nLevels = bad.levels
+        decrementLevels(nLevels)
+        pendingBad = bad.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
+        setPendingBadConsequence(pendingBad)     
     end
 
     def makeTreasureVisible(t)
@@ -190,6 +215,31 @@ module Model
     end
 
     def  initTreasures
+        bringToLife
+        treasure
+        dealer = CardDealer.instance
+        dice = Dice.instance
+        number = dice.nextNumber();
+        
+        if number == 1
+            treasure = dealer.nextTreasure();
+            hiddenTreasures.add(treasure);
+        
+        
+        elsif number < 6 
+            for i in (0..1)
+                treasure = dealer.nextTreasure
+                @hiddenTreasures << treasure
+            end
+          
+        elsif number == 6
+            for j in (0..2)
+                treasure = dealer.nextTreasure
+                @hiddenTreasures << treasure
+            end            
+        end    
+        return true
+      
     end  
 
     def isDead
