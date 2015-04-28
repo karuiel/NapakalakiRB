@@ -14,7 +14,7 @@ module Model
         @name = n
         @goldCoins = g
         @minBonus = min
-        @minbonus = max
+        @minBonus = max
         @type = t
       end
       
@@ -39,11 +39,11 @@ module Model
       end
       
       def to_s
-        output ="Nombre = " + @name + 
-              "\nTipo = "+ @type +
-              "\nValor = " +Integer.toString(@goldCoins) +
-              "\nMin Bonus = " + Integer.toString(@minBonus)+
-              "\nMax Bonus= " + Integer.toString(@maxBonus);
+        output ="Nombre = #{@name}" +  
+              "\nTipo = #{@type}" +
+              "\nValor = #{@goldCoins}"  +
+              "\nMin Bonus = #{@minBonus}" + 
+              "\nMax Bonus= #{@maxBonus}" 
         
         output
             

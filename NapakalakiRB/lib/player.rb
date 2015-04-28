@@ -22,6 +22,7 @@ module Model
       @visibleTreasures = Array.new
       @hiddenTreasures = Array.new
       @pendingBadConsequence = BadConsequence.newDeath("vacío", false)
+      initTreasures
     end
 
       def getCombatLevel
@@ -52,7 +53,7 @@ module Model
     #FINEXAMEN
     
     
-    def bringToLive  
+    def bringToLife  
       @dead = false    
     end  
 
@@ -138,7 +139,7 @@ module Model
         
         for i in (1..nPrize)
             treasure = dealer.nextTreasure()
-            @hiddenTreasures.add(treasure)
+            @hiddenTreasures << treasure
         end     
     end
 
@@ -202,11 +203,11 @@ module Model
         repetitions
     end
      
-    def canMakeTreasurevisible(t)
+    def canMakeTreasureVisible(t)
         type = t.type
         canMake = false
          
-        if type == TreasureKind::ONEHAND || type == TreasureKind::BOTHHANDS
+        if ((type == TreasureKind::ONEHAND) || (type == TreasureKind::BOTHHANDS))
             if contains(@visibleTreasures,TreasureKind::BOTHHANDS)==0
                 onehand = contains(@visibleTreasures,TreasureKind::ONEHHAND)
                 if(((onehand < 2) && (type == TreasureKind::ONEHAND)) ||
@@ -264,30 +265,26 @@ module Model
 
     def initTreasures
         bringToLife
-        treasure
         dealer = CardDealer.instance
         dice = Dice.instance
-        number = dice.nextNumber();
+        number = dice.nextNumber()
         
         if number == 1
-            treasure = dealer.nextTreasure();
-            hiddenTreasures.add(treasure);
-        
+            treasure = dealer.nextTreasure()
+            @hiddenTreasures << treasure
         
         elsif number < 6 
             for i in (0..1)
                 treasure = dealer.nextTreasure
                 @hiddenTreasures << treasure
             end
-          
         elsif number == 6
             for j in (0..2)
                 treasure = dealer.nextTreasure
                 @hiddenTreasures << treasure
             end            
         end    
-        return true
-      
+        return true    
     end  
 
     def isDead
@@ -306,7 +303,7 @@ module Model
        "Nombre: #{@name}\t nivel: #{@level}" 
     end
     
-    private :bringToLive
+    private :bringToLife
     private :incrementLevels
     private :decrementLevels
     private :setPendingBadConsequence

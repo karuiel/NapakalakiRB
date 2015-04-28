@@ -106,16 +106,17 @@ module Model
       end
 
       def canMakeTreasureVisible(t)
-        canMake = @currentPlayer.canMakeTreasureVisible(t);
+
+        canMake = @currentPlayer.canMakeTreasureVisible(t)
         
         if(canMake)
-            @currentPlayer.makeTreasureVisible(t);
+            @currentPlayer.makeTreasureVisible(t)
         end
          canMake;
       end
 
       def  nextTurn
-        allowed = nextTurnAllowed();
+        allowed = nextTurnAllowed()
         if(allowed)
             dealer = CardDealer.instance
             @currentMonster = dealer.nextMonster
