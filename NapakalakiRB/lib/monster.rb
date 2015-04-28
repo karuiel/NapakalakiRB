@@ -58,7 +58,7 @@ module Model
       @name
     end
     
-    def getLevel
+    def getCombatLevel
       @combatLevel
     end
     

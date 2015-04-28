@@ -197,20 +197,36 @@ module Model
          bad = newDeath(@text,@death) 
       
       else if(@nVisibleTreasures != 0 || @nHiddenTreasures != 0)
-          nV = Math.min(@nVisibleTreasures,v.size())
-          nH = Math.min(@nHiddenTreasures,h.size())
-          bad = newNumberOfTreasures(@text, @levels, nV, nH)
+          if(@nVisibleTreasures < v.size())
+            nV =@nVisibleTreasure 
+          else
+            nV = v.size()
+          end 
+          
+          if(@nHiddenTreasures < h.size())
+            nH = @nHiddenTreasures 
+          else
+            nH = h.size()
+          end
+          
+          bad = BadConsequence.newNumberOfTreasures(@text, @levels, nV, nH)
           
       else
-        ArrayList<TreasureKind> vT = Array.new
-        ArrayList<TreasureKind> hT = Array.new
-        ArrayList<Treasure> vCopy = v
-        ArrayList<Treasure> hCopy = h
+        vT = Array.new
+        hT = Array.new
+        vCopy = Array.new()
+        hCopy = Array.new
+        v.each{|t|
+          vCopy.add(t)
+        }
+        h.each{|t|
+          hCopy.add(h)
+        }  
         
         @specificVisibleTreasures.each{|t1|
-            boolean found = false
+            found = false
             vCopy.each{|t2|
-                TreasureKind type = t2.getType()
+                type = t2.getType()
                 if(type == t1 && !found)
                     vT.add(t1)
                     vCopy.remove(t2)
@@ -222,7 +238,7 @@ module Model
         @specificHiddenTreasures.each{|t1|            
             boolean found = false
             @hCopy.each{|t2|
-                TreasureKind type = t2.getType()
+                type = t2.getType()
                 if(type == t1 && !found)
                     hT.add(t1)
                     hCopy.remove(t2)
@@ -230,7 +246,7 @@ module Model
                 end
             }
         }
-        bad  = new BadConsequence(@text ,0, vT, hT)
+        bad  = BadConsequence.newSpecificTreasures(@text ,0, vT, hT)
       end
       end
       return bad;

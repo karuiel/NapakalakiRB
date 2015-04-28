@@ -58,20 +58,20 @@ module Model
 
     def incrementLevels(l)
       if(l>0)
-        if((@levels + l)>10)
-          @levels=10
+        if((@level + l)>10)
+          @level=10
         else
-          @levels += l
+          @level += l
         end
       end
     end  
 
     def  decrementLevels(l)
       if(l>0)
-        if((@levels - l)<=0)
-          @levels=1
+        if((@level - l)<=0)
+          @level=1
         else
-          @levels -= l
+          @level -= l
         end
       end
     end  
@@ -82,7 +82,7 @@ module Model
     end  
 
     def die
-      dealer = CardDealer.getInstance()
+      dealer = CardDealer.instance
         @visibleTreasures.each{|x|
             dealer.giveTreasureBack(x)
         }
@@ -113,15 +113,13 @@ module Model
     end  
 
     def canIBuyLevels(l)
-      if((@levels + l)<10)
+      if((@level + l)<10)
         true
       else
         false
       end
     end  
 
-    #Nota: lo he cambiado porque estaba mal hecho
-    #¿Se supone que se devuelve un float no?
     def computeGoldCoinsValue(t)
       coins = 0
         t.each{|x|
@@ -145,6 +143,43 @@ module Model
     end
 
     def combat(m)
+        myLevel = getCombatLevel
+        levelMonster = m.getCombatLevel 
+        
+        if myLevel > levelMonster
+            prize = m.getPrize
+            applyPrize(prize)
+            if(@level < 10)
+                result = CombatResult::WIN
+            
+            else
+                result = CombatResult::WINANDWINGAME
+            end   
+        
+        else
+            dice = Dice.instance
+            escape = dice.nextNumber
+            if(escape < 5)
+                bad = m.getBadConsequence()
+                amIDead = bad.kills()
+                
+                if(amIDead)
+                    die()
+                    result = CombatResult::LOSEANDDIE
+                
+                else
+                    applyBadConsequence(bad)
+                    result = CombatResult::LOSE
+                end
+            
+            else
+                result = CombatResult::LOSEANDESCAPE
+            
+            end
+        end    
+        discardNecklaceIfVisible()
+        return result
+      
     end
 
     def applyBadConsequence(bad)
@@ -268,7 +303,7 @@ module Model
     end 
 
     def to_s
-      puts "Nombre: #{@name}\t nivel: #{@level}" 
+       "Nombre: #{@name}\t nivel: #{@level}" 
     end
     
     private :bringToLive
