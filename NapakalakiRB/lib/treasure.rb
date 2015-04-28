@@ -17,5 +17,16 @@ module Model
         @minbonus = max
         @type = t
       end
+      
+      def to_s
+        output ="Nombre = " + @name + 
+              "\nTipo = "+ @type +
+              "\nValor = " +Integer.toString(@goldCoins) +
+              "\nMin Bonus = " + Integer.toString(@minBonus)+
+              "\nMax Bonus= " + Integer.toString(@maxBonus);
+        
+        output
+            
+      end
     end
 end

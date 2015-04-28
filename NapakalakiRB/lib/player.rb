@@ -21,7 +21,7 @@ module Model
       @level = 1
       @visibleTreasures = Array.new
       @hiddenTreasures = Array.new
-      @pendingBadConsequence = BadConsequence.newDeath("vacio", false)
+      @pendingBadConsequence = BadConsequence.newDeath("vacío", false)
     end
 
     #EXAMEN
@@ -109,10 +109,10 @@ module Model
     #¿Se supone que se devuelve un float no?
     def computeGoldCoinsValue(t)
       coins = 0
-      levels = 0
         t.each{|x|
           coins += x.getGoldCoins()
         }
+        
         levels = coins / 1000
         levels
     end
@@ -134,9 +134,9 @@ module Model
 
     def applyBadConsequence(bad)
       nLevels = bad.levels
-        decrementLevels(nLevels)
-        pendingBad = bad.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
-        setPendingBadConsequence(pendingBad)     
+      decrementLevels(nLevels)
+      pendingBad = bad.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
+      setPendingBadConsequence(pendingBad)     
     end
 
     def makeTreasureVisible(t)
@@ -151,22 +151,20 @@ module Model
         }
         repetitions
     end
-    
-    #Nota: mismo problema que para java 
+     
     def canMakeTreasurevisible(t)
         type = t.type
         canMake = false
-        
-        
+         
         if type == TreasureKind::ONEHAND || type == TreasureKind::BOTHHANDS
             if contains(@visibleTreasures,TreasureKind::BOTHHANDS)==0
-                onehand = contains(visibleTreasures,TreasureKind::ONEHHAND)
-                if((onehand < 2) && (type == TreasureKind::ONEHAND) ||
-                         (onehand == 0) && (TreasureKind::BOTHHANDS == type))
+                onehand = contains(@visibleTreasures,TreasureKind::ONEHHAND)
+                if(((onehand < 2) && (type == TreasureKind::ONEHAND)) ||
+                         ((onehand == 0) && (TreasureKind::BOTHHANDS == type)))
                     canMake = true
                 end
             end
-        elsif
+        else
             canMake = (contains(visibleTreasures,type) == 0)
         end
         canMake
@@ -214,7 +212,7 @@ module Model
       end
     end
 
-    def  initTreasures
+    def initTreasures
         bringToLife
         treasure
         dealer = CardDealer.instance
@@ -254,10 +252,14 @@ module Model
       end
     end 
 
+    def to_s
+      puts "#{@name}\t nivel: #{@level}" 
+    end
+    
     private :bringToLive
     private :incrementLevels
     private :decrementLevels
-    #private :setPendingBadConsequence
+    private :setPendingBadConsequence
     private :die
     private :discardNecklaceIfVisible
     private :dieIfNoTreasures

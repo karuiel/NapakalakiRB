@@ -266,10 +266,10 @@ module Model
           nextTreasure = @unusedTreasures.at(0);
           @unusedTreasures.delete_at(0)
           
-        elsif
+        else
           @unusedTreasures = @usedTreasures
           @usedTreasures= Array.new
-          shuffleMonters
+          shuffleTreasures
           nextTreasure = @unusedTreasures.at(0)
           @unusedTreasures.delete_at(0)
         end
@@ -281,10 +281,12 @@ module Model
           nextTreasure = @unusedMonster.at(0);
           @unusedMonster.delete_at(0)
           
-        elsif
+        else
           @unusedMonster = @usedMonster
-          @unusedMonster.shuffle!
+          @usedMonster = Array.new
+          shuffleMonsters
           nextTreasure = @unusedMonster.at(0)
+          @unuedTreasures.delete_at(0)
         end
         nextTreasure
       end

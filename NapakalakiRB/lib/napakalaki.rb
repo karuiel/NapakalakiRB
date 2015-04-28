@@ -71,7 +71,7 @@ module Model
         dealer = CardDealer.instance
         dealer.initCards()
         initPlayers(players)
-        nextTurn();
+        nextTurn()
       end
       
       def getCurrentPlayer
@@ -105,7 +105,12 @@ module Model
       end
       
       def  nextTurnAllowed
-          @currentPlayer.validState
+          if(currentPlayerIndex==-1)
+            allowed = true;
+          else
+            allowed = @currentPlayer.validState
+          end
+          allowed
       end
 
       def endOfGame(result)

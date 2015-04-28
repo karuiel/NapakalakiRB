@@ -107,13 +107,14 @@ module Model
       else 
         out += "nil"
       end
+      
       out += "\nSpecificHiddenTreasures: "
       if (@specificHiddenTreasures.size != 0)
         @specificHiddenTreasures.each {|x| 
           out += x.to_s 
           out += " "
 
-          }
+        }
       else
         out += "nil"
       end  
@@ -139,13 +140,13 @@ module Model
       i = 0
       if @specificVisibleTreasures.size !=0
         @specificVisibleTreasures.each{|x|
-            i+=1
             if !eliminado && x == t.type
                 @specificVisibleTreasures.delete_at(i)
                 eliminado = true
             end
+            i+=1
         }
-       elsif
+      else
          @nVisibleTreasures = [0,@nVisibleTreasures-1].max 
       end
     end
