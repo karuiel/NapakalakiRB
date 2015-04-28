@@ -191,6 +191,16 @@ module Model
     end
 
     def makeTreasureVisible(t)
+
+      if(canMakeTreasureVisible(t))
+        @visibleTreasures << t
+        @hiddenTreasures.delete(t) 
+        canMake = true;
+      
+      else       
+           canMake = false;
+      end
+      canMake
     end  
 
     def contains(treasures, t)
@@ -209,7 +219,7 @@ module Model
          
         if ((type == TreasureKind::ONEHAND) || (type == TreasureKind::BOTHHANDS))
             if contains(@visibleTreasures,TreasureKind::BOTHHANDS)==0
-                onehand = contains(@visibleTreasures,TreasureKind::ONEHHAND)
+                onehand = contains(@visibleTreasures,TreasureKind::ONEHAND)
                 if(((onehand < 2) && (type == TreasureKind::ONEHAND)) ||
                          ((onehand == 0) && (TreasureKind::BOTHHANDS == type)))
                     canMake = true

@@ -196,7 +196,7 @@ module Model
       if(@death)
          bad = newDeath(@text,@death) 
       
-      else if(@nVisibleTreasures != 0 || @nHiddenTreasures != 0)
+      elsif(@nVisibleTreasures != 0 || @nHiddenTreasures != 0)
           if(@nVisibleTreasures < v.size())
             nV =@nVisibleTreasure 
           else
@@ -247,7 +247,6 @@ module Model
             }
         }
         bad  = BadConsequence.newSpecificTreasures(@text ,0, vT, hT)
-      end
       end
       return bad;
   
