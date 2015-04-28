@@ -1,9 +1,16 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
 
-require_relative "player.rb"
 require 'singleton'
+require_relative "prize.rb"
+require_relative "bad_consequence.rb"
+require_relative "monster.rb"
+require_relative "treasure_kind.rb"
+require_relative "dice.rb"
+require_relative "player.rb"
+require_relative "card_dealer.rb"
 require_relative "combat_result.rb"
+require_relative "treasure.rb"
 
 module Model
   class Napakalaki
@@ -22,6 +29,22 @@ module Model
 
     end
     
+      def getCurrentPlayer
+        @currentPlayer
+      end
+    
+      def getCurrentMonster
+        @currentMonster
+      end
+      
+      def getVisibleTreasures
+        @visibleTreasures
+      end
+      
+      def getHiddenTreasures
+        @hiddenTreasures
+      end
+      
       def initPlayers(names)
         @players = Array.new
         names.each{|x| 
@@ -105,7 +128,7 @@ module Model
       end
       
       def  nextTurnAllowed
-          if(currentPlayerIndex==-1)
+          if(@currentPlayerIndex==-1)
             allowed = true;
           else
             allowed = @currentPlayer.validState

@@ -23,4 +23,12 @@ module Model
       "Tesoros ganados: #{@treasures} \n Niveles ganados: #{@levels}"
     end
   end
+  
+  def getTreasures
+    @treasures
+  end
+  
+  def getLevels
+    @levels
+  end
 end

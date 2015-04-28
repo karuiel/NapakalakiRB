@@ -262,7 +262,7 @@ module Model
       end
 
       def nextTreasure
-        if @unusedTreasures.size != 0
+        if !@unusedTreasures.size != 0
           nextTreasure = @unusedTreasures.at(0);
           @unusedTreasures.delete_at(0)
           
@@ -277,16 +277,16 @@ module Model
       end
 
       def nextMonster
-        if @unusedMonster.size != 0
-          nextTreasure = @unusedMonster.at(0);
-          @unusedMonster.delete_at(0)
+        if @unusedMonsters.size != 0
+          nextTreasure = @unusedMonsters.at(0);
+          @unusedMonsters.delete_at(0)
           
         else
-          @unusedMonster = @usedMonster
-          @usedMonster = Array.new
+          @unusedMonsters = @usedMonster
+          @usedMonsters = Array.new
           shuffleMonsters
-          nextTreasure = @unusedMonster.at(0)
-          @unuedTreasures.delete_at(0)
+          nextTreasure = @unusedMonsters.at(0)
+          @unuedMonsters.delete_at(0)
         end
         nextTreasure
       end

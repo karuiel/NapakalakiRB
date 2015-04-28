@@ -97,6 +97,30 @@ module Model
 
     end
 
+    def getText
+      @text
+    end
+    
+    def getLevels
+      @levels
+    end
+    
+    def getNVisibleTreasures
+      @nVisibleTreasures
+    end
+    
+    def getNHiddenTreasures
+      @nHiddenTreasures
+    end    
+    
+    def getSpecificHiddenTreasures
+      @specificHiddenTreasures
+    end
+    
+    def getSpecificVisibleTreasures
+      @specificVisibleTreasures
+    end
+    
     def to_s
       out="Text: #{@text}\nLevels: #{@levels}\nnVisibleTreasures: #{@nVisibleTreasures}\n"+
       "nHiddenTreasures: #{@nHiddenTreasures}\nDeath: #{@death}\nSpecificVisibleTreasure: "

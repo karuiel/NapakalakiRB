@@ -18,6 +18,26 @@ module Model
         @type = t
       end
       
+      def getName
+        @name
+      end
+      
+      def getGoldCoins
+        @goldCoins
+      end
+      
+      def getMinBonus
+        @minBonus
+      end
+      
+      def getMaxBonus
+        @maxBonus
+      end
+      
+      def getType
+        @type
+      end
+      
       def to_s
         output ="Nombre = " + @name + 
               "\nTipo = "+ @type +

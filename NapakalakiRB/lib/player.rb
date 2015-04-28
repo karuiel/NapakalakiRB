@@ -24,6 +24,21 @@ module Model
       @pendingBadConsequence = BadConsequence.newDeath("vacío", false)
     end
 
+      def getCombatLevel
+        @combatLevel
+      end
+      
+      def getHiddenTreasures
+        @hiddenTreasures
+      end
+      
+      def getVisibleTreasures
+        @visibleTreasures
+      end
+    
+      def getName
+        @name
+      end
     #EXAMEN
     def setVisibleTreasureList vl
       @visibleTreasures = vl
@@ -253,7 +268,7 @@ module Model
     end 
 
     def to_s
-      puts "#{@name}\t nivel: #{@level}" 
+      puts "Nombre: #{@name}\t nivel: #{@level}" 
     end
     
     private :bringToLive

@@ -53,6 +53,23 @@ module Model
       "\nName: #{@name}\nCombatLevel: #{@combatLevel}\n Price: #{@price.to_s}"+
         "\nBadConsequence: #{@bc.to_s}"
     end
+    
+    def getName
+      @name
+    end
+    
+    def getLevel
+      @combatLevel
+    end
+    
+    def getPrize
+      @price
+    end
+    
+    def getBadConsequence
+      @bc
+    end
+    
   end
 
 end
