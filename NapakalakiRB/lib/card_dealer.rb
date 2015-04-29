@@ -303,6 +303,8 @@ module Model
       def initCards
         initTreasureCardDeck
         initMonsterCardDeck
+        shuffleMonsters
+        shuffleTreasures
       end
 
     private :initTreasureCardDeck
