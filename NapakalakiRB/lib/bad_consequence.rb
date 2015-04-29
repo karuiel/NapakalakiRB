@@ -149,9 +149,9 @@ module Model
     def isEmpty
       if(@levels == 0 && @nVisibleTreasures==0 && @nHiddenTreasures==0 && @death==false &&
                       @specificVisibleTreasures.size==0  && @specificHiddenTreasures.size==0)
-        true
+        return true
       else
-        false
+        return false
       end
     end
 
@@ -162,14 +162,15 @@ module Model
     def substractVisibleTreasure(t)
       eliminado = false
       i = 0
-      if @specificVisibleTreasures.size !=0
+      if @specificVisibleTreasures.size != 0
         @specificVisibleTreasures.each{|x|
             if !eliminado && x == t.type
                 @specificVisibleTreasures.delete_at(i)
                 eliminado = true
             end
             i+=1
-        }
+        }  
+      #if !eliminado
       else
          @nVisibleTreasures = [0,@nVisibleTreasures-1].max 
       end
@@ -180,13 +181,14 @@ module Model
       i = 0
       if @specificHiddenTreasures.size !=0
         @specificHiddenTreasures.each{|x|
-            i+=1
             if !eliminado && x == t.type
                 @specificHiddenTreasures.delete_at(i)
                 eliminado = true
             end
+            i+=1
         }
-       elsif
+      end  
+      if !eliminado
          @nVisibleTreasures = [0,@nVisibleTreasures-1].max 
       end
     end
@@ -217,10 +219,10 @@ module Model
         vCopy = Array.new()
         hCopy = Array.new
         v.each{|t|
-          vCopy.add(t)
+          vCopy << t
         }
         h.each{|t|
-          hCopy.add(h)
+          hCopy. << h
         }  
         
         @specificVisibleTreasures.each{|t1|
@@ -228,7 +230,7 @@ module Model
             vCopy.each{|t2|
                 type = t2.getType()
                 if(type == t1 && !found)
-                    vT.add(t1)
+                    vT << t1
                     vCopy.remove(t2)
                     found = true;
                 end
@@ -236,11 +238,11 @@ module Model
           }
        
         @specificHiddenTreasures.each{|t1|            
-            boolean found = false
+            found = false
             @hCopy.each{|t2|
                 type = t2.getType()
                 if(type == t1 && !found)
-                    hT.add(t1)
+                    hT << t1
                     hCopy.remove(t2)
                     found = true;
                 end
@@ -248,6 +250,7 @@ module Model
         }
         bad  = BadConsequence.newSpecificTreasures(@text ,0, vT, hT)
       end
+      puts bad.to_s + "\n\n\n\n"
       return bad;
   
     end

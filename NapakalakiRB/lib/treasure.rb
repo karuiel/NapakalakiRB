@@ -14,7 +14,7 @@ module Model
         @name = n
         @goldCoins = g
         @minBonus = min
-        @minBonus = max
+        @maxBonus = max
         @type = t
       end
       

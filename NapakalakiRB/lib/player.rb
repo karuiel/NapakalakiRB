@@ -80,6 +80,7 @@ module Model
 
     def setPendingBadConsequence(b)
       @pendingBadConsequence = b
+      puts "\n\n\nEstoy en setPending y el badConsequence es: " + @pendingBadConsequence.to_s
     end  
 
     def die
@@ -239,6 +240,20 @@ module Model
     end
 
     def buyLevels(visible, hidden)
+        levels = computeGoldCoinsValue(visible)
+        levels += computeGoldCoinsValue(hidden)
+        canI = canIBuyLevels(levels.to_i)
+        
+        if(canI)
+            incrementLevels(levels.to_i)
+            visible.each{|v|
+                discardVisibleTreasure(v)
+            }
+            hidden.each{|h|
+                discardHiddenTreasure(h)
+            }
+        end
+        return canI;
     end
 
     def getCombatLevel
@@ -266,6 +281,7 @@ module Model
     end
 
     def validState
+      puts "Estoy en validState"
       if(@pendingBadConsequence.isEmpty() && @hiddenTreasures.size<=4)
         true
       else
