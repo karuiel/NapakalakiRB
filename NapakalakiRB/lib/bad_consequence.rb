@@ -147,12 +147,13 @@ module Model
     end
 
     def isEmpty
+      valid = false
       if(@levels == 0 && @nVisibleTreasures==0 && @nHiddenTreasures==0 && @death==false &&
                       @specificVisibleTreasures.size==0  && @specificHiddenTreasures.size==0)
-        return true
-      else
-        return false
+        valid =  true
       end
+      puts "EN isEmpty; valor de valid = #{valid}\n\n\n"
+      valid
     end
 
     def kills
@@ -160,36 +161,54 @@ module Model
     end
 
     def substractVisibleTreasure(t)
-      eliminado = false
+      puts "En substractVisibleTreasure"
+      eliminado = false 
+      found = false
       i = 0
+      indice = 0
       if @specificVisibleTreasures.size != 0
-        @specificVisibleTreasures.each{|x|
-            if !eliminado && x == t.type
-                @specificVisibleTreasures.delete_at(i)
-                eliminado = true
+        puts "Tamaño no nulo \n\n\n"
+         @specificVisibleTreasures.each{|x|
+           puts "Buscando\n\n\n"
+            if !found && x == t.type
+                indice = i
+                found = true
             end
             i+=1
-        }  
-      #if !eliminado
-      else
-         @nVisibleTreasures = [0,@nVisibleTreasures-1].max 
+        }
+        if found
+          puts "Se ha eliminado el tesoro\n\n\n"
+          @specificVisibleTreasures.delete_at(indice)
+          eliminado = true
+        end 
+      end  
+      if !eliminado
+        puts "Cambiando por número \n\n\n"
+         @nVisibleTreasures = [0,(@nVisibleTreasures-1)].max 
+         puts "Valor del número : #{@nVisibleTreasures}"
       end
     end
 
     def substractHiddenTreasure(t)
       eliminado = false
+      found = false
       i = 0
+      indice = 0
       if @specificHiddenTreasures.size !=0
-        @specificHiddenTreasures.each{|x|
-            if !eliminado && x == t.type
-                @specificHiddenTreasures.delete_at(i)
-                eliminado = true
+         @specificHiddenTreasures.each{|x|
+            if !found && x == t.type
+                indice = i
+                found = true
             end
             i+=1
         }
+        if found
+          @specificHiddenTreasures.delete_at(indice)  
+          eliminado = true
+        end 
       end  
       if !eliminado
-         @nVisibleTreasures = [0,@nVisibleTreasures-1].max 
+         @nHiddenTreasures = [0,@nHiddenTreasures-1].max 
       end
     end
     
@@ -200,7 +219,7 @@ module Model
       
       elsif(@nVisibleTreasures != 0 || @nHiddenTreasures != 0)
           if(@nVisibleTreasures < v.size())
-            nV =@nVisibleTreasure 
+            nV =@nVisibleTreasures 
           else
             nV = v.size()
           end 
@@ -211,40 +230,40 @@ module Model
             nH = h.size()
           end
           
-          bad = BadConsequence.newNumberOfTreasures(@text, @levels, nV, nH)
+          bad = BadConsequence.newNumberOfTreasures(@text, 0, nV, nH)
           
       else
         vT = Array.new
         hT = Array.new
-        vCopy = Array.new()
+        vCopy = Array.new
         hCopy = Array.new
         v.each{|t|
           vCopy << t
         }
         h.each{|t|
-          hCopy. << h
+          hCopy << h
         }  
         
         @specificVisibleTreasures.each{|t1|
             found = false
             vCopy.each{|t2|
-                type = t2.getType()
+                type = t2.getType
                 if(type == t1 && !found)
                     vT << t1
-                    vCopy.remove(t2)
-                    found = true;
+                    vCopy.delete(t2)
+                    found = true
                 end
             }
           }
        
         @specificHiddenTreasures.each{|t1|            
             found = false
-            @hCopy.each{|t2|
-                type = t2.getType()
+            hCopy.each{|t2|
+                type = t2.getType
                 if(type == t1 && !found)
                     hT << t1
-                    hCopy.remove(t2)
-                    found = true;
+                    hCopy.delete(t2)
+                    found = true
                 end
             }
         }

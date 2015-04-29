@@ -85,6 +85,7 @@ module Model
 
     def die
       dealer = CardDealer.instance
+      @dead
         @visibleTreasures.each{|x|
             dealer.giveTreasureBack(x)
         }
@@ -227,16 +228,30 @@ module Model
                 end
             end
         else
-            canMake = (contains(visibleTreasures,type) == 0)
+            canMake = (contains(@visibleTreasures,type) == 0)
         end
         canMake
         
     end  
 
     def discardVisibleTreasure(t)
+        @visibleTreasures.delete(t)
+        if( (!@pendingBadConsequence.isEmpty()))
+            @pendingBadConsequence.substractVisibleTreasure(t)
+        end
+        dealer = CardDealer.instance
+        dealer.giveTreasureBack(t)
+        dieIfNoTreasures()
     end 
 
     def discardHiddenTreasure(t)
+        @hiddenTreasures.delete(t)
+        if( (!@pendingBadConsequence.isEmpty()))
+            @pendingBadConsequence.substractVisibleTreasure(t)
+        end
+        dealer = CardDealer.instance
+        dealer.giveTreasureBack(t)
+        dieIfNoTreasures()
     end
 
     def buyLevels(visible, hidden)
@@ -281,15 +296,16 @@ module Model
     end
 
     def validState
-      puts "Estoy en validState"
-      if(@pendingBadConsequence.isEmpty() && @hiddenTreasures.size<=4)
-        true
-      else
-        false
+      valid = true
+      if(!@pendingBadConsequence.isEmpty() || @hiddenTreasures.size>4)
+        puts "En estado válido\n\n\n"
+        valid = false
       end
+      valid
     end
 
     def initTreasures
+      puts "En initTreasures \n\n\n"
         bringToLife
         dealer = CardDealer.instance
         dice = Dice.instance
@@ -318,11 +334,11 @@ module Model
     end
 
     def hasVisibleTreasures
+      hasV = true
       if(@visibleTreasures.size == 0)
-        false
-      else
-        true
+        hasV = false
       end
+      hasV
     end 
 
     def to_s
