@@ -263,12 +263,14 @@ module Model
       end
 
       def nextTreasure
-        if @unusedTreasures.size != 0
+        if @unusedTreasures.size != 0         
           nextTreasure = @unusedTreasures.at(0);
           @unusedTreasures.delete_at(0)
           
         else
-          @unusedTreasures = @usedTreasures
+          @usedTreasures.each{|t|
+            @unusedTreasures << t
+          }
           @usedTreasures= Array.new
           shuffleTreasures
           nextTreasure = @unusedTreasures.at(0)
@@ -283,7 +285,9 @@ module Model
           @unusedMonsters.delete_at(0)
           
         else
-          @unusedMonsters = @usedMonster
+          @usedMonster.each{|m|
+            @unusedMonsters << m
+          }
           @usedMonsters = Array.new
           shuffleMonsters
           nextTreasure = @unusedMonsters.at(0)
