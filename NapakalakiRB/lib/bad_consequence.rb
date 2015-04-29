@@ -234,7 +234,7 @@ module Model
           vCopy << t
         }
         h.each{|t|
-          hCopy << h
+          hCopy << t
         }  
         
         @specificVisibleTreasures.each{|t1|

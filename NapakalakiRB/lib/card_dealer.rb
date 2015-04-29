@@ -193,10 +193,13 @@ module Model
         @unusedMonsters << Monster.new('La que redacta en las tinieblas', 2, badConsequence, prize)
 
         prize = Prize.new(2,1) 
-        badConsequence = BadConsequence.newNumberOfTreasures(
-       'Te faltan manos para tanta cabeza. Pierdes tres niveles y'+
-        'tus tesoros visibles de las manos.', 3, 80,0)
-        @unusedMonsters << Monster.new('Bicéfalo', 20, badConsequence, prize)
+        tesoro = Array.new
+        tesoro << TreasureKind::ONEHAND
+        tesoro << TreasureKind::ONEHAND
+        tesoro << TreasureKind::BOTHHANDS
+        badConsequence = BadConsequence.newSpecificTreasures('Te faltan manos para tanta cabeza. Pierdes '+
+        'tres niveles y tus tesoros visibles de las manos.', 3, tesoro,vacio)
+        @unusedMonsters << Monster.new('Bicéfalo', 20, badConsequence, prize);
 
         prize = Prize.new(2,1) 
         badConsequence = BadConsequence.newDeath(
@@ -298,6 +301,8 @@ module Model
       end
 
       def initCards
+        initTreasureCardDeck
+        initMonsterCardDeck
       end
 
     private :initTreasureCardDeck

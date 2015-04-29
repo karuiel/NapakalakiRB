@@ -92,7 +92,7 @@ module Model
 
       def initGame(players)
         dealer = CardDealer.instance
-        dealer.initCards()
+        dealer.initCards
         initPlayers(players)
         nextTurn()
       end
