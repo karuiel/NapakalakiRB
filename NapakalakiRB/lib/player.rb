@@ -80,7 +80,6 @@ module Model
 
     def setPendingBadConsequence(b)
       @pendingBadConsequence = b
-      puts "\n\n\nEstoy en setPending y el badConsequence es: " + @pendingBadConsequence.to_s
     end  
 
     def die
@@ -298,14 +297,12 @@ module Model
     def validState
       valid = true
       if(!@pendingBadConsequence.isEmpty() || @hiddenTreasures.size>4)
-        puts "En estado válido\n\n\n"
         valid = false
       end
       valid
     end
 
     def initTreasures
-      puts "En initTreasures \n\n\n"
         bringToLife
         dealer = CardDealer.instance
         dice = Dice.instance

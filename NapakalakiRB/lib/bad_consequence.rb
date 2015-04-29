@@ -152,7 +152,6 @@ module Model
                       @specificVisibleTreasures.size==0  && @specificHiddenTreasures.size==0)
         valid =  true
       end
-      puts "EN isEmpty; valor de valid = #{valid}\n\n\n"
       valid
     end
 
@@ -161,15 +160,12 @@ module Model
     end
 
     def substractVisibleTreasure(t)
-      puts "En substractVisibleTreasure"
       eliminado = false 
       found = false
       i = 0
       indice = 0
       if @specificVisibleTreasures.size != 0
-        puts "Tamaño no nulo \n\n\n"
          @specificVisibleTreasures.each{|x|
-           puts "Buscando\n\n\n"
             if !found && x == t.type
                 indice = i
                 found = true
@@ -177,15 +173,12 @@ module Model
             i+=1
         }
         if found
-          puts "Se ha eliminado el tesoro\n\n\n"
           @specificVisibleTreasures.delete_at(indice)
           eliminado = true
         end 
       end  
       if !eliminado
-        puts "Cambiando por número \n\n\n"
          @nVisibleTreasures = [0,(@nVisibleTreasures-1)].max 
-         puts "Valor del número : #{@nVisibleTreasures}"
       end
     end
 
@@ -269,7 +262,6 @@ module Model
         }
         bad  = BadConsequence.newSpecificTreasures(@text ,0, vT, hT)
       end
-      puts bad.to_s + "\n\n\n\n"
       return bad;
   
     end
