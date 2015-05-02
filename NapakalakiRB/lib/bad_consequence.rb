@@ -82,7 +82,7 @@ module Model
 
     end
 
-    ##
+   ##
    # Constructor con parámetros
    # String t: cadena de texto
    # int l: número de niveles a perder
@@ -105,7 +105,7 @@ module Model
 
     end                                       
 
-    ##
+   ##
    # Constructor con parámetros
    # String t: cadena de texto
    # boolean death: muerte
@@ -115,7 +115,8 @@ module Model
       new(t, 0, 0, 0, Array.new, Array.new, death)
 
     end
-##
+    
+   ##
    #  Metodo que devuelve el atributo texto
    # devuelve  String: cadena de texto 
    # 
@@ -130,6 +131,7 @@ module Model
     def getLevels
       @levels
     end
+    
     ##
    #  Metodo que devuelve el atributo nVisibleTreasures
    # devuelve  int: número de tesoros visibles a perder 

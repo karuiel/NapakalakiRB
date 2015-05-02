@@ -43,7 +43,7 @@ module Model
      #  BadConsequence bc: mal rollo del monstrup
      #  Prize price: buen rollo del monstruo
      # 
-    def initialize(aName, someCombatLevel, aBC, aPrice)
+    def initialize(aName, someCombatLevel, aBC, aPrice,lC)
       @name = aName
 
       if someCombatLevel > 0
@@ -53,7 +53,8 @@ module Model
       end  
 
       @price = aPrice
-      @bc = aBC    
+      @bc = aBC   
+      @levelChangeAgainstCultistPlayer = lC
     end
 
     def to_s

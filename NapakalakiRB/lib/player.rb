@@ -46,9 +46,29 @@ module Model
      #  Método para obtener el nivel de combate del jugador
      # devuelve  int: nivel de combate
     #
-      def getCombatLevel
-        @combatLevel
+    def getCombatLevel
+      total_level = @level
+      collar = false
+
+      #Bucle de búsqueda del collar
+      @visibleTreasures.each{|x|
+        if(x.type == TreasureKind::NECKLACE)
+          collar=true
+        end
+      }
+
+      #Bucles de recuento de niveles
+      if(collar==true)
+        @visibleTreasures.each{|x|
+          total_level += x.maxBonus
+        }
+      else
+        @visibleTreasures.each{|x|
+          total_level += x.minBonus
+        }
       end
+      total_level
+    end
       
      ##
      #  Consultor hiddenTreasures
@@ -73,6 +93,11 @@ module Model
       def getName
         @name
       end
+      
+      def getOponentLevel(m)
+        m.combatLevel
+      end
+      
     #EXAMEN
     def setVisibleTreasureList vl
       @visibleTreasures = vl
@@ -84,6 +109,19 @@ module Model
     end
     
     #FINEXAMEN
+    
+    def shouldConvert
+      dice = Dice.instance
+      number = dice.nextNumber
+      
+      if number == 6
+        should = true
+      else 
+        should = false
+      end
+      should
+    end
+    
     
     ##
      #  Método encargado de revivir al jugador
@@ -249,7 +287,12 @@ module Model
                 
                 else
                     applyBadConsequence(bad)
-                    result = CombatResult::LOSE
+                    convert = shouldConvert
+                    if convert
+                        result = CombatResult.LOSEANDCONVERT;
+                    else
+                        result = CombatResult.LOSE;
+                    end
                 end
             
             else
@@ -385,29 +428,6 @@ module Model
         return canI;
     end
 
-    def getCombatLevel
-      total_level = @level
-      collar = false
-
-      #Bucle de búsqueda del collar
-      @visibleTreasures.each{|x|
-        if(x.type == TreasureKind::NECKLACE)
-          collar=true
-        end
-      }
-
-      #Bucles de recuento de niveles
-      if(collar==true)
-        @visibleTreasures.each{|x|
-          total_level += x.maxBonus
-        }
-      else
-        @visibleTreasures.each{|x|
-          total_level += x.minBonus
-        }
-      end
-      total_level
-    end
 
     ##
      #  Método para determinar si un jugador está en estado válido; es decir:
@@ -479,7 +499,7 @@ module Model
      # devuelve  String: cadena de texto obtenida
     #
     def to_s
-       "Nombre: #{@name}\t nivel: #{@level}" 
+       "Nombre: #{@name}\t nivel: #{@level}\tNivel de Combate:"# + Integer.toString(this.getCombatLevel()
     end
     
     private :bringToLife
@@ -492,6 +512,7 @@ module Model
     private :canIBuyLevels
     private :contains
     protected :computeGoldCoinsValue
+    protected :shouldConvert
 
   end
 end  
