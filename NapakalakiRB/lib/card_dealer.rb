@@ -416,7 +416,7 @@ module Model
     #
       def initCards
         initTreasureCardDeck
-        initMonsterCardDec
+        initMonsterCardDeck
         initCultistCardDesk
         shuffleMonsters
         shuffleTreasures
