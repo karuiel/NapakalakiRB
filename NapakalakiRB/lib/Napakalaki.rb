@@ -89,10 +89,19 @@ module Model
     #
       
       def combat
-        result = @currentPlayer.combat(@currentMonster);
-        dealer = CardDealer.instance;
-        dealer.giveMonsterBack(@currentMonster);
-        return result;
+        result = @currentPlayer.combat(@currentMonster)
+        dealer = CardDealer.instance
+        
+        if(result == CombatResult::LOSEANDCONVERT)
+          
+            c = dealer.nextCultist()
+            cp = CultistPlayer.new(@currentPlayer,c)
+            @currentPlayer = cp
+            @players.set(@currentPlayerIndex, cp)
+        end
+        
+        dealer.giveMonsterBack(@currentMonster)
+        return result
       end
 
      ##

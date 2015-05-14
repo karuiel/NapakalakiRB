@@ -9,7 +9,12 @@
  #
 #require_relative "treasure_kind.rb"
 module Model
+require_relative 'Card'  
+  
   class Treasure
+    
+    include Card
+    
         attr_reader :name
         attr_reader :goldCoins;
         attr_reader :minBonus;
@@ -85,5 +90,14 @@ module Model
         output
             
       end
+      
+      def getBasicValue
+        getMinBonus
+      end
+      
+      def getSpecialValur
+        getMaxBonus
+      end
+      
     end
 end

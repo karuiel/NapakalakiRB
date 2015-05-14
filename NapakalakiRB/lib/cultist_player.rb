@@ -13,6 +13,10 @@ module Module
       @myCultistCard << c
     end
     
+    def newPlayer(player)
+      super
+      @@totalCultistPlayers += 1
+    end
     
     def self.getTotalCultistPlayer()
         totalCultistPlayers

@@ -42,6 +42,16 @@ module Model
       initTreasures
     end
     
+    def newPlayer(player)
+      @dead = player.dead
+      @name = player.name
+      @level = player.level
+      @visibleTreasures = player.visibleTreasures
+      @hiddenTreasures = player.hiddenTreasures
+      @pendingBadConsequence = player.pendingBadConsequence
+      #initTreasures
+    end
+    
     ##
      #  Método para obtener el nivel de combate del jugador
      # devuelve  int: nivel de combate
@@ -97,6 +107,7 @@ module Model
       def getOponentLevel(m)
         m.combatLevel
       end
+      
       
     #EXAMEN
     def setVisibleTreasureList vl
@@ -262,7 +273,7 @@ module Model
     #
     def combat(m)
         myLevel = getCombatLevel
-        levelMonster = m.getCombatLevel 
+        levelMonster = getOponentLevel(m) 
         
         if myLevel > levelMonster
             prize = m.getPrize
@@ -289,9 +300,9 @@ module Model
                     applyBadConsequence(bad)
                     convert = shouldConvert
                     if convert
-                        result = CombatResult.LOSEANDCONVERT;
+                        result = CombatResult::LOSEANDCONVERT
                     else
-                        result = CombatResult.LOSE;
+                        result = CombatResult::LOSE
                     end
                 end
             

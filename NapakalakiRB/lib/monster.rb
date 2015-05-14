@@ -29,8 +29,11 @@
 #require_relative "prize.rb"
 
 module Model
-
+require_relative 'Card'
+  
   class Monster
+    include Card
+    
     attr_reader :name
     attr_reader :combatLevel
     attr_reader :price
@@ -92,6 +95,14 @@ module Model
      #
     def getBadConsequence
       @bc
+    end
+    
+    def getBasicValue
+      getCombatLevel
+    end
+    
+    def getSpecialValue
+      getCombatLevel + @levelChangeAgainstCultistPlayer
     end
     
   end
