@@ -19,7 +19,7 @@ module Module
     end
     
     def self.getTotalCultistPlayer()
-        totalCultistPlayers
+        @@totalCultistPlayers
     end
     
     def shouldConvert

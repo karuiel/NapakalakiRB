@@ -303,7 +303,7 @@ module Model
 
       end
       
-      def initCultistCardDesk
+      def initCultistCardDeck
         name = "Sectario"
         level = 1
         c = Cultist.new(name,level)
@@ -417,7 +417,7 @@ module Model
       def initCards
         initTreasureCardDeck
         initMonsterCardDeck
-        initCultistCardDesk
+        initCultistCardDeck
         shuffleMonsters
         shuffleTreasures
         shuffleCultists
@@ -425,7 +425,7 @@ module Model
 
     private :initTreasureCardDeck
     private :initMonsterCardDeck
-    private :initCultistCardDesk
+    private :initCultistCardDeck
     private :shuffleTreasures
     private :shuffleMonsters
     private :shuffleCultists
