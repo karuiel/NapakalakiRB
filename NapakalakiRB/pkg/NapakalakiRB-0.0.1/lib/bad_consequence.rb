@@ -11,7 +11,7 @@
 #e incluso la muerte.
 #
 #La clase _BadConsequence_ consta de:
-#* método initialize
+## método initialize
 # En este método se inicializa un objeto válido de la clase que tiene los siguientes
 # atributos:
 # - tex: texto con el mal rollo
@@ -22,125 +22,74 @@
 # - specificHiddenTreasures: array con los tesoros específicos ocultos que pierdes
 # - specificVisibleTreasures: array con los tesoros específicos visibles que pierdes
 #
-#* getters de todos los atributos
-#* constructor newNumberOfTreasures
+## getters de todos los atributos
+## constructor newNumberOfTreasures
 #
 #En este constructor pasas como parámetro el texto, los niveles, y el número de
 #tesoros visibles y ocultos que pierdes
 #
-#* constructor newSpecificTreasures
+## constructor newSpecificTreasures
 #
 #En este constructor pasas como parámetro el texto, los niveles y los arrays
 #correspondientes a los tesoros específicos visibles y ocultos
 #
-#* constructor newDeath
+## constructor newDeath
 #
 #En este constructor pasas como parametro solo el texto se usa para poner la veriable
 #_death_ a true
 #
-#* método to_s
+## método to_s
 #
 #En este método se devuelve un string con el estado completo del objeto
 #
+
+#require_relative "treasure_kind.rb"
 module Model
   class BadConsequence
 
+    
     private_class_method :new
     attr_reader :text
-    attr_reader :levels
-    attr_reader :nVisibleTreasures
-    attr_reader :nHiddenTreasures
-    attr_reader :specificHiddenTreasures
-    attr_reader :specificVisibleTreasures
+    
 
-    def initialize(aText, someLevels, someVisibleTreasures, someHiddenTreasures, 
-                    someSpecificVisibleTreasures, someSpecificHiddenTreasures, newDeath)
-      @text = aText
-      if someLevels > 0
-        @levels = someLevels
-      else
-        @levels = 0
-      end
-
-      if someVisibleTreasures > 0
-        @nVisibleTreasures = someVisibleTreasures
-      else 
-        @nVisibleTreasures = 0
-      end
-
-      if someHiddenTreasures  > 0
-        @nHiddenTreasures = someHiddenTreasures
-      else 
-        @nHiddenTreasures = 0
-      end
-
-      @specificVisibleTreasures = someSpecificVisibleTreasures
-      @specificHiddenTreasures = someSpecificHiddenTreasures
-      @death = newDeath
-
+    def initialize(aText)
+      @text = aText 
     end
+   
 
-    def BadConsequence.newNumberOfTreasures(t, l, nVisible, nHidden)
-      new(t, l, nVisible, nHidden, Array.new, Array.new, false)  
-    end
 
-    def BadConsequence.newSpecificTreasures (t, l, v,h)
-      new(t, l, 0, 0, v, h, false)
-
-    end                                       
-
-    def BadConsequence.newDeath (t,death)
-
-      new(t, 0, 0, 0, Array.new, Array.new, death)
-
-    end
-
+    ##
+   #  Método para convertir en cadena de texto los atributos del objeto
+   # devuelve  String: cadena de texto con el valor de los atributos
+   #
     def to_s
-      out="Text: #{@text}\nLevels: #{@levels}\nnVisibleTreasures: #{@nVisibleTreasures}\n"+
-      "nHiddenTreasures: #{@nHiddenTreasures}\nDeath: #{@death}\nSpecificVisibleTreasure: "
-      if(@specificVisibleTreasures.size != 0)
-        @specificVisibleTreasures.each {|x|
-          out += x.to_s
-          out += " "}
-      else 
-        out += "nil"
-      end
-      out += "\nSpecificHiddenTreasures: "
-      if (@specificHiddenTreasures.size != 0)
-        @specificHiddenTreasures.each {|x| 
-          out += x.to_s 
-          out += " "
-
-          }
-      else
-        out += "nil"
-      end  
-      out
-
     end
 
+    ##
+   #  Método para comprobar si el mal rollo está vacío
+   # devuelve  boolean: true en caso de que esté vacío
+   #                  false en caso contrario
+   #
+   
     def isEmpty
-      if(@levels == 0 && @nVisibleTreasures==0 && @nHiddenTreasures==0 && @death==false &&
-                      @specificVisibleTreasures.size==0  && @specificHiddenTreasures.size==0)
-        true
-      else
-        false
-      end
-    end
-
-    def kills
-      @death
-    end
-
-    def substractVisibleTreasure(t)
 
     end
 
-    def substractHiddenTreasure(t)
-
+     ##
+   #  Metodo que devuelve el atributo texto
+   # devuelve  String: cadena de texto 
+   # 
+    def getText
     end
+  
+    ##
+   #  Método para crear un mal rollo de forma que el jugador lo pueda cumplir
+   #  ArrayList<Treasure> v: lista de tesoros visibles que posee el jugador
+   #  ArrayList<Treasure> h: lista de tesoros ocultos que posee el jugador
+   # devuelve  BadConsequence: mal rollo creado
+  #
     def adjustToFitTreasureLists(v,h)
-
     end
+
   end
 end

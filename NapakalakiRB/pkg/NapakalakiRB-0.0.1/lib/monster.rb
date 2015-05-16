@@ -14,27 +14,39 @@
 #
 #La clase _Monster_ esta compuesta por:
 #
-#* método initialize
+## método initialize
 #Este método permite inicializar un objeto de la clase _Monster_, inicializa los
 #atributos mencionados en la descripción de la clase
 #
-#* getters de los atributos
-#* método to_s
+## getters de los atributos
+## método to_s
 #
 #En este método se devuelve un string con el estado completo del objeto
 #
 #
+
+#require_relative "bad_consequence.rb"
+#require_relative "prize.rb"
+
 module Model
+require_relative 'Card'
+  
   class Monster
+    include Card
+    
     attr_reader :name
     attr_reader :combatLevel
     attr_reader :price
     attr_reader :bc
-    #en el diagrama viene primero bc y luego price lo cambiamos o lo dejamos asi?
-    #tener en cuenta que tambien habria que cambiarlo en el main en todos los mostruos
-    #Nota: yo creo que si que deberiamos cambiarlo
 
-    def initialize(aName, someCombatLevel, aBC, aPrice)
+    ##
+     #  Constructor con parámetros
+     #  String name: nombre del monstruo
+     #  int level: nivel de combate del monstruo
+     #  BadConsequence bc: mal rollo del monstrup
+     #  Prize price: buen rollo del monstruo
+     # 
+    def initialize(aName, someCombatLevel, aBC, aPrice,lC)
       @name = aName
 
       if someCombatLevel > 0
@@ -44,12 +56,55 @@ module Model
       end  
 
       @price = aPrice
-      @bc = aBC    
+      @bc = aBC   
+      @levelChangeAgainstCultistPlayer = lC
     end
 
     def to_s
       "\nName: #{@name}\nCombatLevel: #{@combatLevel}\n Price: #{@price.to_s}"+
         "\nBadConsequence: #{@bc.to_s}"
     end
+    
+    ##
+     # Método para obtener el atributo name
+     # devuelve  String: nombre del monstruo
+     # 
+    def getName
+      @name
+    end
+    
+    ##
+     #  Método para obtener el atributo combatLevel
+     # devuelve  int: nivel de combate del monstruo
+     # 
+    def getCombatLevel
+      @combatLevel
+    end
+    
+    ##
+     # Método para obtener el atributo price
+     # devuelve  Prize: buen rollo del monstruo
+     # 
+    def getPrize
+      @price
+    end
+    
+     ##
+     #  Método para obtener el atributo bc
+     # devuelve  BadConsequence: mal rollo del monstruo
+     #
+    def getBadConsequence
+      @bc
+    end
+    
+    def getBasicValue
+      getCombatLevel
+    end
+    
+    def getSpecialValue
+      getCombatLevel + @levelChangeAgainstCultistPlayer
+    end
+    
   end
+
 end
