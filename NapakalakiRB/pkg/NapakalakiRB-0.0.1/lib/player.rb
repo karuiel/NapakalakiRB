@@ -38,7 +38,7 @@ module Model
       @level = 1
       @visibleTreasures = Array.new
       @hiddenTreasures = Array.new
-      @pendingBadConsequence = BadConsequence.newDeath("vacío", false)
+      @pendingBadConsequence = nil
       initTreasures
     end
     
