@@ -7,13 +7,14 @@ class NumberBadConsequence < BadConsequence
   attr_reader :nHiddenTreasures
   attr_reader :nVisibleTreasures
   attr_reader :levels
+  
   def initialize(aText,someLevels,someVisibleTreasures,someHiddenTreasures)
     super(aText)
     if someLevels > 0
-        @levels = someLevels
-      else
-        @levels = 0
-      end
+     @levels = someLevels
+    else
+      @levels = 0
+    end
       
     if someVisibleTreasures > 0
         @nVisibleTreasures = someVisibleTreasures
@@ -53,7 +54,7 @@ class NumberBadConsequence < BadConsequence
       @nVisibleTreasures
     end
     
-    ##
+   ##
    #  Metodo que devuelve el atributo nHiddenTreasures
    # devuelve  int: número de tesoros invisibles a perder
    #  
@@ -62,11 +63,12 @@ class NumberBadConsequence < BadConsequence
     end    
     
   def isEmpty
-    valid = false
-    if(@levels == 0 && @nVisibleTreasures==0 && @nHiddenTreasures==0)
-      valid =  true
+    empty = false
+    if(@nVisibleTreasures==0 && @nHiddenTreasures==0)
+      empty =  true
     end
-    valid
+    
+    empty
   end  
   
     ##
@@ -98,8 +100,6 @@ class NumberBadConsequence < BadConsequence
   #
     def adjustToFitTreasureLists(v,h)
        
-      
-      
           if(@nVisibleTreasures < v.size())
             nV =@nVisibleTreasures 
           else
@@ -115,7 +115,6 @@ class NumberBadConsequence < BadConsequence
           bad = NumberBadConsequence.new(@text, 0, nV, nH)      
           bad
   
-   
   end
   
   

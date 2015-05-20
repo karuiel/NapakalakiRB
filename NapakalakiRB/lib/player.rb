@@ -38,8 +38,7 @@ module Model
       @level = 1
       @visibleTreasures = Array.new
       @hiddenTreasures = Array.new
-      @pendingBadConsequence = nil
-      #initTreasures
+      @pendingBadConsequence = nil    
     end
     
     def newPlayer(player)
@@ -49,7 +48,6 @@ module Model
       @visibleTreasures = player.visibleTreasures
       @hiddenTreasures = player.hiddenTreasures
       @pendingBadConsequence = player.pendingBadConsequence
-      #initTreasures
     end
     
     ##
@@ -298,12 +296,14 @@ module Model
                 
                 else
                     applyBadConsequence(bad)
-                    convert = shouldConvert
-                    if convert
-                        result = CombatResult::LOSEANDCONVERT
-                    else
-                        result = CombatResult::LOSE
-                    end
+                    result = CombatResult::LOSE
+                    if !isDead 
+                      convert = shouldConvert
+                      
+                      if convert
+                          result = CombatResult::LOSEANDCONVERT
+                      end    
+                    end           
                 end
             
             else
@@ -311,7 +311,7 @@ module Model
             
             end
         end    
-        discardNecklaceIfVisible()
+        discardNecklaceIfVisible
         return result
       
     end

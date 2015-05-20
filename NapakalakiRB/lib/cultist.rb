@@ -3,7 +3,9 @@
 # and open the template in the editor.
 
 module Model
-require_relative 'Card'
+  
+
+require_relative 'card'
 require_relative "cultist_player.rb"
 class Cultist
   

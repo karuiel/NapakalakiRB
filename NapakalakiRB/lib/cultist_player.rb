@@ -12,18 +12,19 @@ module Model
       @myCultistCard = Array.new
       @myCultistCard << c
     end
-    
-    def newPlayer(player)
-      super
-      @@totalCultistPlayers += 1
-    end
+   
+   # def newPlayer(player)
+   #   super
+   #   @@totalCultistPlayers += 1
+   # end
+
     
     def self.getTotalCultistPlayer()
         @@totalCultistPlayers
     end
     
     def shouldConvert
-      return false
+      false
     end
     
     def getOponentLevel(m)
@@ -39,7 +40,7 @@ module Model
     end
     
     protected :computeGoldCoinsValue
-    #protected :getOponentLevel
+   # protected :getOponentLevel
     protected :shouldConvert
     
   end

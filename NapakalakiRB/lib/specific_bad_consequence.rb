@@ -7,6 +7,7 @@ class SpecificBadConsequence < BadConsequence
   attr_reader :specificHiddenTreasures
   attr_reader :specificVisibleTreasures
   attr_reader :levels
+  
   def initialize(aText,someLevels,someSpecificVisibleTreasures,someSpecificHiddenTreasures)
     super(aText)
     if someLevels > 0
@@ -20,11 +21,11 @@ class SpecificBadConsequence < BadConsequence
   end
   
   def isEmpty
-    valid = false
-    if(@levels == 0 && @specificVisibleTreasures.size==0  && @specificHiddenTreasures.size==0)
-      valid =  true
+    empty = false
+    if(@specificVisibleTreasures.size==0  && @specificHiddenTreasures.size==0)
+      empty =  true
     end
-    valid
+    empty
   end
   
     ##
@@ -90,6 +91,7 @@ class SpecificBadConsequence < BadConsequence
         hT = Array.new
         vCopy = Array.new
         hCopy = Array.new
+        
         v.each{|t|
           vCopy << t
         }
@@ -120,16 +122,13 @@ class SpecificBadConsequence < BadConsequence
                 end
             }
         }
-        bad  = SpecificBadConsequence.new(@text ,0, vT, hT)
-  
-        bad
-  
+        bad  = SpecificBadConsequence.new(@text ,0, vT, hT)  
+        bad 
     end
   
   
   def to_s
-    out= "Esto es un mal rollo con el siguiente contenido: " + 
-      "\n texto : #{@text}"  + "\nLevels: #{@levels}" + "\nSpecificVisibleTreasure: "
+    out= "\nLevels: #{@levels}" + "\nSpecificVisibleTreasure: "
       if(@specificVisibleTreasures.size != 0)
         @specificVisibleTreasures.each {|x|
           out += x.to_s
@@ -148,7 +147,7 @@ class SpecificBadConsequence < BadConsequence
       else
         out += "nil"
       end  
-  out
+    out
   end
   
   ##

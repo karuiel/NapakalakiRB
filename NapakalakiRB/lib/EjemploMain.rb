@@ -23,17 +23,16 @@
 # 
 # and open the template in the editor.
 
-require_relative "Napakalaki"
-require_relative "GameTester"
+
+#require_relative "GameTester"
 
 
 
 module Model
-
+require_relative "Napakalaki"
   class EjemploMain
    
-  def self.main
-                # Prueba de las clases de la segunda práctica    
+  def self.main   
 
         #Obtener enumerados    
         treasureKind = TreasureKind::BOTHHANDS
@@ -50,8 +49,8 @@ module Model
         #Prueba clase Prize
         puts "\nPrize"
         
-         t = 1
-         l = 1
+        t = 1
+        l = 1
         premio = Prize.new(t,l)
         puts premio.to_s
        
@@ -59,7 +58,7 @@ module Model
         puts "\nCultist"
         
         n = "un nombre"
-         gl = 1
+        gl = 1
         cultist = Cultist.new(n,gl)
         puts cultist.getBasicValue
         puts cultist.getSpecialValue
@@ -68,9 +67,9 @@ module Model
         puts "\nTreasure"
         
         nombre = "un nombre"
-         g = 1
-         min = 1
-         max = 2
+        g = 1
+        min = 1
+        max = 2
         tesoro = TreasureKind::NECKLACE
         treasure = Treasure.new(nombre, g, min, max, tesoro)
         puts treasure.to_s
@@ -97,9 +96,9 @@ module Model
         puts death.to_s
         
         
-         levels = 1
-         nV = 2
-         nH = 4
+        levels = 1
+        nV = 2
+        nH = 4
         number = NumberBadConsequence.new(text, levels, nV, nH)
         puts number.to_s
         puts number.isEmpty
@@ -107,7 +106,6 @@ module Model
         number.substractVisibleTreasure(treasure)
         puts number.adjustToFitTreasureLists(visibles, hidden)
         puts number.to_s
-        
         
         sV = Array.new
         sH = Array.new

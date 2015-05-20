@@ -13,18 +13,18 @@ module Model
    
     include Singleton
     
-    ##
+     ##
      #  Constructor de la clase
-    #
+     #
     
     def initialize
       
     end
     
-    ##
+     ##
      #  Método para obtener un número
      # devuelve  int: número obtenido
-    #
+     #
     def nextNumber
       1 + rand(6)
     end

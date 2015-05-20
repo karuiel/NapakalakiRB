@@ -29,10 +29,9 @@
 #require_relative "prize.rb"
 
 module Model
-require_relative 'Card'
+require_relative "card"
   
   class Monster
-    include Card
     
     attr_reader :name
     attr_reader :combatLevel
@@ -77,7 +76,7 @@ require_relative 'Card'
      #  Método para obtener el atributo combatLevel
      # devuelve  int: nivel de combate del monstruo
      # 
-    def getCombatLevel
+    def getLevel
       @combatLevel
     end
     
@@ -98,11 +97,11 @@ require_relative 'Card'
     end
     
     def getBasicValue
-      getCombatLevel
+      getLevel
     end
     
     def getSpecialValue
-      getCombatLevel + @levelChangeAgainstCultistPlayer
+      getLevel + @levelChangeAgainstCultistPlayer
     end
     
   end

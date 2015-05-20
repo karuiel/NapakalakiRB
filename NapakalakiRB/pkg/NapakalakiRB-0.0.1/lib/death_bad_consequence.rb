@@ -34,10 +34,7 @@ attr_reader :death
          bad = DeathBadConsequence.new(@text,@death)      
          bad
   
-    end
-  
- 
-    
+    end   
 
   def isEmpty
     if @death==false
@@ -46,10 +43,11 @@ attr_reader :death
       false
     end    
   end
+  
   def to_s
-    out= "Esto es un mal rollo con el siguiente contenido: " + 
-      "\n texto : #{@text}"  + "\n death : #{@death}"
-  out
+    output = super
+    output += "\n death = #{@death}"
+    output
   end
 
 end

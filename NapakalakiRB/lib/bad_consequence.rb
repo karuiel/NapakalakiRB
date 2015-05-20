@@ -65,6 +65,9 @@ module Model
    # devuelve  String: cadena de texto con el valor de los atributos
    #
     def to_s
+      output = "\nEsto es un mal rollo con el siguiente contenido:\n"
+      output +="Text = #{@text}"
+      output
     end
 
     ##
@@ -74,7 +77,6 @@ module Model
    #
    
     def isEmpty
-
     end
 
      ##
@@ -82,6 +84,7 @@ module Model
    # devuelve  String: cadena de texto 
    # 
     def getText
+      @text
     end
   
     ##
