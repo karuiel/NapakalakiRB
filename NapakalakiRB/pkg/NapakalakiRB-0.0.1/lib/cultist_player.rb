@@ -9,8 +9,7 @@ module Model
     def initialize(p,c)
       newPlayer(p)
       @@totalCultistPlayers += 1 
-      @myCultistCard = Array.new
-      @myCultistCard << c
+      @myCultistCard = c
     end
     
     def self.getTotalCultistPlayer()
@@ -26,7 +25,7 @@ module Model
     end
     
     def getCombatLevel
-      super + @myCultistCard.at(0).getSpecialValue
+      super + @myCultistCard.getSpecialValue
     end
     
     def computeGoldCoinsValue(t)
