@@ -4,7 +4,7 @@
 
 module Model
 require_relative 'Card'
-  
+require_relative "cultist_player.rb"
 class Cultist
   
   include Card
@@ -18,8 +18,14 @@ class Cultist
     @gainedLevels
   end
   
-  def getSpecialValus
-    @gainedLevels + CultistPlayer.getTotalCulstistPlayer
+  def getSpecialValue
+    @gainedLevels + CultistPlayer.getTotalCultistPlayer()
+  end
+  
+  def to_s
+        
+    output = "Nombre: " + @name + "\t\tGainedLevels = " + @gainedLevels.to_s
+        output
   end
   
 end

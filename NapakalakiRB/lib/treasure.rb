@@ -95,7 +95,7 @@ require_relative 'Card'
         getMinBonus
       end
       
-      def getSpecialValur
+      def getSpecialValue
         getMaxBonus
       end
       

@@ -39,7 +39,7 @@ module Model
       @visibleTreasures = Array.new
       @hiddenTreasures = Array.new
       @pendingBadConsequence = nil
-      initTreasures
+      #initTreasures
     end
     
     def newPlayer(player)
@@ -321,7 +321,7 @@ module Model
      #  BadConsequence bad: mal rollo recibido
     #
     def applyBadConsequence(bad)
-      nLevels = bad.levels
+      nLevels = bad.getLevels
       decrementLevels(nLevels)
       pendingBad = bad.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
       setPendingBadConsequence(pendingBad)     
@@ -448,8 +448,13 @@ module Model
      #
     def validState
       valid = true
-      if(!@pendingBadConsequence.isEmpty() || @hiddenTreasures.size>4)
+      if (@hiddenTreasures.size>4)
         valid = false
+      end
+      if(@pendingBadConsequence!=nil) 
+        if(!@pendingBadConsequence.isEmpty())
+          valid = false
+        end
       end
       valid
     end
@@ -510,7 +515,14 @@ module Model
      # devuelve  String: cadena de texto obtenida
     #
     def to_s
-       "Nombre: #{@name}\t nivel: #{@level}\tNivel de Combate:"# + Integer.toString(this.getCombatLevel()
+     output =  "Nombre: #{@name}\t nivel: #{@level}\tNivel de Combate: " + getCombatLevel.to_s +
+                   "\n\tMuerto = " + @dead.to_s
+        if(@pendingBadConsequence != nil)
+            output += "\n\tPendingBadConsequence = " + @pendingBadConsequence.to_s
+        
+        else
+            output += "\n\tPendingBadConsequence = [] "
+        end
     end
     
     private :bringToLife
@@ -522,7 +534,7 @@ module Model
     private :dieIfNoTreasures
     private :canIBuyLevels
     private :contains
-    protected :computeGoldCoinsValue
+    #protected :computeGoldCoinsValue
     protected :shouldConvert
 
   end

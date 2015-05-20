@@ -56,7 +56,9 @@ module Model
       @text = aText 
     end
    
-
+    def getLevels
+      0
+    end
 
     ##
    #  Método para convertir en cadena de texto los atributos del objeto

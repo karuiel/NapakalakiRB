@@ -2,7 +2,7 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-module Module
+module Model
   class CultistPlayer < Player
     @@totalCultistPlayers = 0
     
@@ -39,7 +39,7 @@ module Module
     end
     
     protected :computeGoldCoinsValue
-    protected :getOponentLevel
+    #protected :getOponentLevel
     protected :shouldConvert
     
   end

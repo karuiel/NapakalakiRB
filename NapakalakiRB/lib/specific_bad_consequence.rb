@@ -2,7 +2,7 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 module Model
-class SpecificBadConsequence
+class SpecificBadConsequence < BadConsequence
   public_class_method :new
   attr_reader :specificHiddenTreasures
   attr_reader :specificVisibleTreasures
