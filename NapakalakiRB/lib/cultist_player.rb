@@ -7,17 +7,11 @@ module Model
     @@totalCultistPlayers = 0
     
     def initialize(p,c)
-      super(p)
+      newPlayer(p)
       @@totalCultistPlayers += 1 
       @myCultistCard = Array.new
       @myCultistCard << c
     end
-   
-   # def newPlayer(player)
-   #   super
-   #   @@totalCultistPlayers += 1
-   # end
-
     
     def self.getTotalCultistPlayer()
         @@totalCultistPlayers

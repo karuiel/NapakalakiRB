@@ -128,7 +128,8 @@ class SpecificBadConsequence < BadConsequence
   
   
   def to_s
-    out= "\nLevels: #{@levels}" + "\nSpecificVisibleTreasure: "
+    out = super
+    out += "\nLevels: #{@levels}" + "\nSpecificVisibleTreasure: "
       if(@specificVisibleTreasures.size != 0)
         @specificVisibleTreasures.each {|x|
           out += x.to_s

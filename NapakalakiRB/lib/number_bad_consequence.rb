@@ -120,7 +120,8 @@ class NumberBadConsequence < BadConsequence
   
   
   def to_s
-    out= "Esto es un mal rollo con el siguiente contenido: " + 
+    out = super
+    out += "Esto es un mal rollo con el siguiente contenido: " + 
       "\n texto : #{@text}"  + "\nLevels: #{@levels}\nnVisibleTreasures: #{@nVisibleTreasures}\n"+
       "nHiddenTreasures: #{@nHiddenTreasures}"
   out

@@ -32,7 +32,16 @@ module Model
 require_relative "Napakalaki"
   class EjemploMain
    
-  def self.main   
+  def self.main  
+    
+    player = Player.new("name")
+    cultist = Cultist.new("nombre", 7)
+    cultistPlayer = CultistPlayer.new(player,cultist)
+    puts player.to_s
+    puts cultistPlayer.to_s
+  end 
+
+
 
         #Obtener enumerados    
         treasureKind = TreasureKind::BOTHHANDS
@@ -174,5 +183,4 @@ end
 
 if $0 == __FILE__
   Model::EjemploMain.main
-end
 end

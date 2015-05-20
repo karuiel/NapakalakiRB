@@ -26,6 +26,8 @@ module Model
     attr_reader :hiddenTreasures
     attr_reader :visibleTreasures
     attr_reader :name
+    attr_reader :pendingBadConsequence
+    attr_reader :level
     @@MAXHIDDENTREASURES = 4
 
 ##
@@ -42,11 +44,11 @@ module Model
     end
     
     def newPlayer(player)
-      @dead = player.dead
-      @name = player.name
+      @dead = player.isDead
+      @name = player.getName
       @level = player.level
-      @visibleTreasures = player.visibleTreasures
-      @hiddenTreasures = player.hiddenTreasures
+      @visibleTreasures = player.getVisibleTreasures
+      @hiddenTreasures = player.getHiddenTreasures
       @pendingBadConsequence = player.pendingBadConsequence
     end
     
