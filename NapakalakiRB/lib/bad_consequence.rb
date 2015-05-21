@@ -54,10 +54,10 @@ module Model
       @text
     end
   
-    def substractVisibleTreasure     
+    def substractVisibleTreasure(treasure)
     end
     
-    def substractHiddenTreasure    
+    def substractHiddenTreasure(treasure)
     end
     
     ##

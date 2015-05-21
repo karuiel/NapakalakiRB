@@ -99,8 +99,8 @@ require_relative "Napakalaki"
         death = DeathBadConsequence.new(text, mata)
         puts death.to_s
         puts death.isEmpty
-        #death.substractHiddenTreasure(treasure)
-        #death.substractVisibleTreasure(treasure)
+        death.substractHiddenTreasure(treasure)
+        death.substractVisibleTreasure(treasure)
         puts death.adjustToFitTreasureLists(visibles, hidden)
         puts death.to_s
         
@@ -170,12 +170,12 @@ require_relative "Napakalaki"
         player.applyBadConsequence(death)
         player.isDead
         
-        #Prueba cultist        
+        #Prueba cultist player       
         puts "Prueba cultist Player"
         cultistPlayer = CultistPlayer.new(player, cultist)
         puts CultistPlayer.getTotalCultistPlayer()
         puts cultistPlayer.getOponentLevel(monster)
-        
+        #puts cultistPlayer.to_s
 
   end
 

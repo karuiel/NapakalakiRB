@@ -21,7 +21,7 @@ class Cultist
   end
   
   def getSpecialValue
-    @gainedLevels + CultistPlayer.getTotalCultistPlayer()
+    @gainedLevels * CultistPlayer.getTotalCultistPlayer()
   end
   
   def to_s

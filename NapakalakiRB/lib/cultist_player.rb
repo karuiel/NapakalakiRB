@@ -32,6 +32,12 @@ module Model
       super * 2
     end
     
+    def to_s
+        output = super
+        output += "\n\tmyCultistCard = " + @myCultistCard.to_s
+        output
+    end
+    
     protected :computeGoldCoinsValue
    # protected :getOponentLevel
     protected :shouldConvert
